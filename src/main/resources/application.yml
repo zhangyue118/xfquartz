@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  typeAliasesPackage: com.netintech.xfquartz.bean
+  mapperLocations: classpath:mapper/*.xml
+
+logging:
+  config: classpath:log/logback-spring.xml
+  path: D:/xflog

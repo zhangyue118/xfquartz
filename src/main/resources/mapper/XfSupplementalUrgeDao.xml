@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.XfSupplementalUrgeDao">
+
+     <select id="getXfSupplementalUrgeCount" parameterType="map" resultType="int">
+		 select count(1) from 
+	     (SELECT m.id FROM xf_matters m
+	     left JOIN xf_trace t on t.matter_id=m.id
+	     where state &lt; 10 and
+	     t.undertake_unit=(SELECT dept_id FROM xf_user WHERE id=#{userId}) and m.ms110addcontent is not null and m.ms110addcontent !=''
+	     union
+			SELECT m.id FROM xf_matters m
+		    where state &lt; 10 and
+	 		(SELECT dept_id FROM xf_user WHERE id=#{userId})=(SELECT dept_id FROM xf_user WHERE id=m.creater) and m.ms110addcontent is not null and m.ms110addcontent !=''
+	 		)a
+	</select>
+	
+</mapper>
+
