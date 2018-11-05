@@ -98,6 +98,8 @@ public class MyWebSocket {
 
     /**
      * 发生错误时调用
+     * @param session
+     * @param error
      */
      @OnError
      public void onError(Session session, Throwable error) {
@@ -105,16 +107,22 @@ public class MyWebSocket {
          error.printStackTrace();
      }
 
-
+    /**
+     * 发送消息
+     * @param message
+     * @param session
+     * @throws IOException
+     */
      public void sendMessage(String message, Session session) throws IOException {
          session.getBasicRemote().sendText(message);
          //this.session.getAsyncRemote().sendText(message);
      }
 
-
-     /**
-      * 群发自定义消息
-      * */
+    /**
+     * 群发自定义消息
+     * @param message
+     * @throws IOException
+     */
     public static void sendInfo(String message) throws IOException {
         for(String in:connections.keySet()){
             try {
