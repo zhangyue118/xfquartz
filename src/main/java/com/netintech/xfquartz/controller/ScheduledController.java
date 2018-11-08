@@ -1,6 +1,7 @@
 package com.netintech.xfquartz.controller;
 
 import ch.qos.logback.classic.Logger;
+import com.netintech.xfquartz.service.PhotoQueryTaskService;
 import com.netintech.xfquartz.service.ScheduledService;
 import com.netintech.xfquartz.websocket.MyWebSocket;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +24,9 @@ public class ScheduledController {
 
     @Autowired
     ScheduledService scheduledService;
+
+    @Autowired
+    PhotoQueryTaskService photoQueryTaskService;
 
     private final static Logger logger = (Logger) LoggerFactory.getLogger(ScheduledController.class);
 
@@ -43,5 +48,13 @@ public class ScheduledController {
                 logger.error("发送补充催办数量"+count+"给用户"+in+"失败!");
             }
         }
+    }
+
+    @GetMapping("/testPhoto")
+    public Object getPhotoQueryTaskList(){
+        Map<String,Object> map =new HashMap<String,Object>();
+        map.put("start",0);
+        map.put("end",20);
+        return photoQueryTaskService.getPhotoQueryTaskList(map);
     }
 }

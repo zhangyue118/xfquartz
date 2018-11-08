@@ -4,7 +4,7 @@ spring:
 
 mybatis:
   typeAliasesPackage: com.netintech.xfquartz.bean
-  mapperLocations: classpath:mapper/*.xml
+  mapperLocations: classpath:mapper/*/*.xml
 
 logging:
   config: classpath:log/logback-spring.xml

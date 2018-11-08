@@ -1,4 +1,4 @@
-package com.netintech.xfquartz.dao;
+package com.netintech.xfquartz.dao.xf;
 
 import org.apache.ibatis.annotations.Mapper;
 

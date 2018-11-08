@@ -1,9 +1,17 @@
 spring:
   datasource:
-    url: jdbc:mysql://50.78.138.13:3306/xf
-    username: root
-    password: netmarch
-    driver-class-name: com.mysql.jdbc.Driver
+    first:
+      url: jdbc:mysql://50.78.138.13:3306/xf
+      username: root
+      password: netmarch
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+    second:
+      username: xf110
+      password: 000
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@10.35.197.50:1521/orcl
+      type: com.alibaba.druid.pool.DruidDataSource
 
 server:
   port: 9083
