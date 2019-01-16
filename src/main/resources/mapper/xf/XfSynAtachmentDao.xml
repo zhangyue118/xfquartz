@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.XfSynAtachmentDao">
+
+    
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfSynAtachment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_syn_atachment (
+        form_id,
+           matter_id,
+           filename,
+           files,
+           create_time,
+           is_handle
+        ) VALUES (
+        #{formId} ,
+        	#{matterId} ,
+        	#{filename} ,
+        	#{files} ,
+        	#{createTime} ,
+        	#{isHandle}       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfSynAtachment">
+        UPDATE xf_syn_atachment
+        <set>
+	        <if test="formId != null" >
+	            form_id = #{formId} ,
+	        </if>
+		    <if test="matterId != null" >
+	            matter_id = #{matterId} ,
+	        </if>
+		    <if test="filename != null" >
+	            filename = #{filename} ,
+	        </if>
+		    <if test="files != null" >
+	            files = #{files} ,
+	        </if>
+		    <if test="createTime != null" >
+	            create_time = #{createTime} ,
+	        </if>
+		    <if test="isHandle != null" >
+	            is_handle = #{isHandle} 
+	        </if>
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfSynAtachment">
+	 delete from xf_syn_atachment
+	  WHERE 1=1
+      and matter_id=#{matterId}  
+	</delete>
+	
+	 <!--查询列表  -->
+	<select id="getXfSynAtachmentList"  parameterType="map"  resultType="com.netintech.xfquartz.bean.XfSynAtachment">
+	   SELECT id,
+           form_id formId,
+           matter_id matterId,
+           filename,
+           files,
+           create_time createTime,
+           is_handle isHandle
+	    FROM xf_syn_atachment
+       where is_handle=0
+	    <if test="keyword!=null and keyword!=''">
+	    </if>
+	</select>   
+	
+	
+	<insert id="insert2" parameterType="com.netintech.xfquartz.bean.XfSynAtachment" useGeneratedKeys="true" keyProperty="guid">
+		<selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">  
+                SELECT xf110.Nextval as ID from DUAL  
+          </selectKey>
+          INSERT INTO xf_syn_atachment (
+        id,
+           form_id,
+           matter_id,
+           filename,
+           files,
+           create_time,
+           is_handle
+        ) VALUES (
+        #{id},
+        	#{formId},
+        	#{matterId},
+        	#{filename},
+        	#{files},
+        	#{createTime},
+        	#{isHandle}       
+        )
+	</insert>
+	
+	<insert id="insertBatch2" parameterType="java.util.List">
+          
+          INSERT INTO xf_syn_atachment (
+        	id,
+           form_id,
+           matter_id,
+           filename,
+           files,
+           create_time,
+           is_handle
+        ) 
+        SELECT xf110.Nextval as ID,A.* from(
+        	<foreach collection="list" item="item" index="index"
+			separator="UNION ALL">
+				select
+	            #{item.formId,jdbcType=VARCHAR} ,
+	            #{item.matterId,jdbcType=INTEGER} ,
+	            #{item.filename,jdbcType=VARCHAR} ,
+	            #{item.files,jdbcType=BLOB} ,
+	            #{item.createTime,jdbcType=TIMESTAMP} ,
+	            #{item.isHandle,jdbcType=INTEGER} 
+				from dual
+		</foreach>
+        ) A
+	</insert>
+
+</mapper>
+

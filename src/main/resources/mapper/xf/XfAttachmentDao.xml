@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.XfAttachmentDao">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapXfAttachment" type="com.netintech.xfquartz.bean.XfAttachment">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="type" column="type"  jdbcType="VARCHAR"/>
+        <result property="file" column="file"  jdbcType="VARCHAR"/>
+        <result property="fileSize" column="file_size"  jdbcType="VARCHAR"/>
+        <result property="extension" column="extension"  jdbcType="VARCHAR"/>
+        <result property="name" column="name"  jdbcType="VARCHAR"/>
+        <result property="matterId" column="matter_id"  jdbcType="INTEGER"/>
+        <result property="processId" column="process_id"  jdbcType="INTEGER"/>
+        <result property="undertakeId" column="undertake_id"  jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
+        <result property="creater" column="creater"  jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time"  jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater"  jdbcType="INTEGER"/>
+	</resultMap>
+	
+	
+	
+     <!--<resultMap id="ResultMapXfAttachmentDto" type="com.netintech.system.dto.XfAttachmentDto" extends="ResultMapXfAttachment">-->
+	  <!--<result property="userName" column="userName"  jdbcType="VARCHAR"/> -->
+	<!--</resultMap>-->
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库所有字段 -->
+	<sql id="XfAttachment_field">
+           id,
+           type,
+           file,
+           file_size,
+           extension,
+           name,
+           matter_id,
+           process_id,
+           undertake_id,
+           create_time,
+           creater,
+           update_time,
+           updater
+	</sql>
+	
+	 <!-- 声明数据库字段除id -->
+	<sql id="XfAttachment_insertField">
+           type,
+           file,
+           file_size,
+           extension,
+           name,
+           matter_id,
+           process_id,
+           undertake_id,
+           create_time,
+           creater,
+           update_time,
+           updater
+	</sql>
+	
+	<!-- 实体类属性  -->
+	<sql id="XfAttachment_insert">
+        	#{type} ,
+        	#{file} ,
+        	#{fileSize} ,
+        	#{extension} ,
+        	#{name} ,
+        	#{matterId} ,
+        	#{processId} ,
+        	#{undertakeId} ,
+        	#{createTime} ,
+        	#{creater} ,
+        	#{updateTime} ,
+        	#{updater} 
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfAttachment_update">
+	        <if test="type != null" >
+	            type = #{type} ,
+	        </if>
+	        <if test="file != null" >
+	            file = #{file} ,
+	        </if>
+		    <if test="fileSize != null" >
+	            file_size = #{fileSize} ,
+	        </if>
+		    <if test="extension != null" >
+	            extension = #{extension} ,
+	        </if>
+		    <if test="name != null" >
+	            name = #{name} ,
+	        </if>
+		    <if test="matterId != null" >
+	            matter_id = #{matterId} ,
+	        </if>
+		    <if test="processId != null" >
+	            process_id = #{processId} ,
+	        </if>
+		    <if test="undertakeId != null" >
+	            undertake_id = #{undertakeId} ,
+	        </if>
+		    <if test="creater != null" >
+	            creater = #{creater} ,
+	        </if>
+		    <if test="updateTime != null" >
+	            update_time = #{updateTime} ,
+	        </if>
+		    <if test="updater != null" >
+	            updater = #{updater} 
+	        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="XfAttachment_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="type != null " >
+	            and type =#{type}
+	        </if>
+	        <if test="file != null " >
+	            and file =#{file}
+	        </if>
+	        <if test="fileSize != null " >
+	            and file_size =#{fileSize}
+	        </if>
+	        <if test="extension != null " >
+	            and extension =#{extension}
+	        </if>
+	        <if test="name != null " >
+	            and name =#{name}
+	        </if>
+	        <if test="matterId != null " >
+	            and matter_id =#{matterId}
+	        </if>
+	        <if test="processId != null " >
+	            and process_id =#{processId}
+	        </if>
+	        <if test="undertakeId != null " >
+	            and undertake_id =#{undertakeId}
+	        </if>
+	        <if test="createTime != null " >
+	            and create_time =#{createTime}
+	        </if>
+	        <if test="creater != null " >
+	            and creater =#{creater}
+	        </if>
+	        <if test="updateTime != null " >
+	            and update_time =#{updateTime}
+	        </if>
+	        <if test="updater != null " >
+	            and updater =#{updater}
+	        </if>
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfAttachment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_attachment (
+        <include refid="XfAttachment_insertField" />
+        ) VALUES (
+        <include refid="XfAttachment_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from xf_attachment where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfAttachment">
+	 delete from xf_attachment
+	  WHERE 1=1
+      <include refid="XfAttachment_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from xf_attachment
+	  WHERE 1=1
+      <include refid="XfAttachment_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfAttachment">
+        UPDATE xf_attachment
+        <set>
+	        <include refid="XfAttachment_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapXfAttachment" parameterType="map">
+		select <include refid="XfAttachment_field" />
+ 		from xf_attachment where 1=1
+ 		<include refid="XfAttachment_where" /> 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listByEntity" resultMap="ResultMapXfAttachment" parameterType="com.netintech.xfquartz.bean.XfAttachment">
+		select <include refid="XfAttachment_field" />
+ 		from xf_attachment where 1=1
+ 		<include refid="XfAttachment_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapXfAttachment" parameterType="java.lang.Integer">
+		select 	<include refid="XfAttachment_field" />
+ 		from xf_attachment 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapXfAttachment" parameterType="map">
+		select <include refid="XfAttachment_field" />
+ 		from xf_attachment where 1=1
+ 		<include refid="XfAttachment_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapXfAttachment" parameterType="com.netintech.xfquartz.bean.XfAttachment">
+		select <include refid="XfAttachment_field" />
+ 		from xf_attachment where 1=1
+ 		<include refid="XfAttachment_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO xf_attachment (
+           type,
+           file,
+           file_size,
+           extension,
+           name,
+           matter_id,
+           process_id,
+           create_time,
+           creater
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			    #{item.type} ,
+	            #{item.file} ,
+	            #{item.fileSize} ,
+	            #{item.extension} ,
+	            #{item.name},
+	            #{item.matterId},
+	            #{item.processId} ,
+	            #{item.createTime} ,
+	            #{item.creater} 
+	           
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        xf_attachment 
+        <set>
+          <if test="item.type != null" >
+	        type = #{item.type} ,
+	        </if>
+            <if test="item.file != null" >
+	        file = #{item.file} ,
+	        </if>
+		    <if test="item.fileSize != null" >
+	        file_size = #{item.fileSize} ,
+	        </if>
+		    <if test="item.extension != null" >
+	        extension = #{item.extension} ,
+	        </if>
+		    <if test="item.name != null" >
+	        name = #{item.name} ,
+	        </if>
+		    <if test="item.matterId != null" >
+	        matter_id = #{item.matterId} ,
+	        </if>
+		    <if test="item.processId != null" >
+	        process_id = #{item.processId},
+	        </if>
+		    <if test="item.undertakeId != null" >
+	        undertake_id = #{item.undertakeId},
+	        </if>
+		    <if test="item.creater != null" >
+	        creater = #{item.creater},
+	        </if>
+		    <if test="item.updateTime != null" >
+	        update_time = #{item.updateTime},
+	        </if>
+		    <if test="item.updater != null" >
+	        updater = #{item.updater}
+	        </if>
+	    </set>
+        WHERE  
+        	 id=#{item.id}
+        </foreach>    
+	</update>
+	
+	
+	 <!--查询总数  -->
+	<select id="getXfAttachmentCount"  parameterType="map" resultType="int">
+	     SELECT count(1) FROM xf_attachment 
+	     where 1=1 
+          <if test="keyword!=null and keyword!=''">
+	      </if>
+	</select>
+	
+	 <!--查询列表  -->
+	<select id="getXfAttachmentList2"  parameterType="map"  resultMap="ResultMapXfAttachment">
+	   SELECT <include refid="XfAttachment_field" />
+	    FROM xf_attachment
+       where 1=1 
+	    <include refid="XfAttachment_where" /> 
+	</select>   
+	
+	<!-- 批量删除 -->
+	<delete id="exDelete" parameterType="String">
+	  delete from xf_attachment
+	   where id in (1)
+	</delete>
+	
+	<!-- 根据事项表中的id查询对应的附件表中的数据 -->
+	<select id="findgetByIdXfAttachmentList"  parameterType="Integer"  resultMap="ResultMapXfAttachment">
+	   select * from xf_attachment where matter_id=#{id}
+	</select>   
+	
+	<select id="getByProcessId" parameterType="int" resultMap="ResultMapXfAttachment">
+		select * from xf_attachment where process_id=#{processId} and type="C"
+	</select>
+	
+	<select id="findgetByIdXfAttachment" parameterType="map" resultMap="ResultMapXfAttachment">
+	<!-- select x.id id,x.type type,x.file file,x.file_size fileSize,x.extension extension,x.name name,x.process_id processId,
+	    x.undertake_id undertakeId,x.create_time createTime,
+	   (select login_name from xf_user where id=#{userId}) createrStr,
+	   x.update_time updateTime,x.updater updater from xf_attachment x where x.undertake_id=#{traceIds} and x.matter_id=#{matterId}
+	   and x.type=#{type} -->
+	   select x.id id,x.type type,x.file file,x.file_size fileSize,x.extension extension,x.name name,x.process_id processId,
+	    d.dic_name undertakeName,x.create_time createTime,
+	   (select login_name from xf_user where id=#{userId}) createrStr,
+	   x.update_time updateTime,x.updater updater from xf_attachment x 
+       LEFT JOIN xf_trace t ON x.undertake_id=t.id
+       LEFT JOIN xf_dics d ON t.undertake_unit=d.dic_code
+       where x.undertake_id=#{traceIds} and x.matter_id=#{matterId}
+	   AND x.type=#{type}
+       AND d.dic_group=#{dicGroup}
+	</select>
+	
+	<select id="findgetXfAttachment" parameterType="map" resultMap="ResultMapXfAttachment">
+	   <!-- select x.*,u.login_name createrStr,d.dic_name undertakeName from xf_attachment x left join xf_trace t on x.matter_id=t.matter_id LEFT JOIN xf_dics d ON t.undertake_unit=d.dic_code LEFT JOIN xf_user u ON x.creater=u.id 
+       where x.type=#{type} and t.is_done='0' and x.matter_id=#{matterId} and d.dic_group=#{dicGroup} -->
+       SELECT a.*,d.dic_name createrStr,u.login_name undertakeName FROM xf_attachment a LEFT JOIN xf_trace t ON a.undertake_id=t.id
+	   LEFT JOIN xf_process p ON t.active_process=p.id
+	   LEFT JOIN xf_dics d ON t.undertake_unit=d.dic_code
+	   LEFT JOIN xf_user u ON a.creater=u.id
+	   WHERE t.is_done=1
+	   and p.is_return=0
+	   and a.matter_id=#{matterId}
+	   and a.type=#{type}
+	   and d.dic_group=#{dicGroup}
+	</select>
+	
+	<!--根据附件类型查询  -->
+	<!--<select id="getAttachmentByType" parameterType="map" resultMap="ResultMapXfAttachmentDto">-->
+		<!--SELECT a.*,u.user_name as userName FROM xf_attachment a-->
+			<!--LEFT JOIN xf_user u ON a.creater=u.id-->
+		 <!--WHERE a.matter_id=#{id} AND a.type=#{type}-->
+	<!--</select>-->
+	
+	<select id="findgetMapXfAttachment" parameterType="map" resultMap="ResultMapXfAttachment">
+		SELECT a.* FROM xf_attachment a
+		 WHERE a.matter_id=#{matterId} AND a.name=#{oldName} AND a.type="Z"
+	</select>
+	<select id="findgetMapXfAttachment1" parameterType="map" resultMap="ResultMapXfAttachment">
+		SELECT a.* FROM xf_attachment a
+		 WHERE a.undertake_id=#{traceId} AND a.name=#{oldName} AND a.type="Z"
+	</select>
+	<update id="updateMatterId" parameterType="map">
+	   update xf_attachment set matter_id=#{matterId} where id in (${attmentIds});
+	</update>
+	
+	<!-- 文书库查询总数 -->
+	<select id="queryXfMattersLibraryCount" parameterType="map" resultType="int">
+		select count(1) from 
+	     (SELECT a.create_time,m.xf_name FROM matter_lnk_lawloc a
+	     left join xf_matters m on a.matter_id=m.id
+	     where 1=1
+	     	<if test="credentials != null and credentials != ''" >
+	            and m.credentials = #{credentials}
+	        </if>
+		    <if test="xfName != null and xfName != ''" >
+	            and m.xf_name = #{xfName} 
+	        </if>
+		    <if test="contact != null and contact != ''" >
+	            and m.contact = #{contact} 
+	        </if>
+		    <if test="xfSource != null and xfSource != ''" >
+	            and m.xf_source = #{xfSource} 
+	        </if>
+		    <if test="xfAppeal != null and xfAppeal != ''" >
+	            and m.xf_appeal like '%${xfAppeal}%' 
+	        </if>
+		    <if test="order != null and order != ''" >
+	            and m.`order` = #{order} 
+	        </if>
+	        <if test="startTime != null and startTime != ''">
+				AND m.xf_date  &gt;= str_to_date('${startTime}','%Y-%m-%d')
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND m.xf_date  &lt;= str_to_date('${endTime}','%Y-%m-%d')+1
+			</if>
+			<if test="librarytype != null and librarytype != ''" >
+	            and a.lawloc_code = #{librarytype} 
+	        </if>
+			) b
+	</select>
+	
+	<!--&lt;!&ndash; 文书库查询 分页列表 &ndash;&gt;-->
+	<!--<select id="queryXfMattersLibraryList" parameterType="map" resultType="com.netintech.system.entity.XfLibrary">-->
+		<!--select b.* from -->
+		<!--(SELECT a.create_time as createTime,m.xf_name as xfName,-->
+		<!--concat('(', xf_year,')', m.`order`,'号')  as strOrder,-->
+		<!--d.dic_name as librarytype,-->
+		<!--a.loc_id as id,-->
+		<!--d.dic_code as dicCode-->
+		<!--FROM  matter_lnk_lawloc a-->
+	     <!--left join xf_matters m on a.matter_id=m.id-->
+	     <!--left join xf_dics d on a.lawloc_code=d.dic_code AND d.dic_group=#{FLWS}-->
+	     <!--where 1=1-->
+	     	<!--<if test="credentials != null and credentials != ''" >-->
+	            <!--and m.credentials = #{credentials}-->
+	        <!--</if>-->
+		    <!--<if test="xfName != null and xfName != ''" >-->
+	            <!--and m.xf_name = #{xfName} -->
+	        <!--</if>-->
+		    <!--<if test="contact != null and contact != ''" >-->
+	            <!--and m.contact = #{contact} -->
+	        <!--</if>-->
+		    <!--<if test="xfSource != null and xfSource != ''" >-->
+	            <!--and m.xf_source = #{xfSource} -->
+	        <!--</if>-->
+		    <!--<if test="xfAppeal != null and xfAppeal != ''" >-->
+	            <!--and m.xf_appeal like '%${xfAppeal}%' -->
+	        <!--</if>-->
+		    <!--<if test="order != null and order != ''" >-->
+	            <!--and m.`order` = #{order} -->
+	        <!--</if>-->
+	        <!--<if test="startTime != null and startTime != ''">-->
+				<!--AND m.xf_date  &gt;= str_to_date('${startTime}','%Y-%m-%d')-->
+			<!--</if>-->
+			<!--<if test="endTime != null and endTime != ''">-->
+				<!--AND m.xf_date  &lt;= str_to_date('${endTime}','%Y-%m-%d')+1-->
+			<!--</if>-->
+			<!--<if test="librarytype != null and librarytype != ''" >-->
+	            <!--and a.lawloc_code = #{librarytype} -->
+	        <!--</if>-->
+		<!---->
+	        <!--order by createTime desc-->
+			<!--) b LIMIT #{start},#{end}-->
+	<!--</select>-->
+	
+	<!-- 获取当前子流程佐证资料 -->
+	<select id="getXfAttachments" parameterType="map" resultMap="ResultMapXfAttachment">
+	   <!-- select x.*,u.login_name createrStr,d.dic_name undertakeName from xf_attachment x left join xf_trace t on x.matter_id=t.matter_id LEFT JOIN xf_dics d ON t.undertake_unit=d.dic_code LEFT JOIN xf_user u ON x.creater=u.id 
+       where x.type=#{type} and t.is_done='0' and x.matter_id=#{matterId} and d.dic_group=#{dicGroup} -->
+       SELECT a.*,d.dic_name undertakeName,u.user_name createrStr FROM xf_attachment a LEFT JOIN xf_trace t ON a.undertake_id=t.id
+	   LEFT JOIN xf_process p ON t.active_process=p.id
+	   LEFT JOIN xf_dics d ON t.undertake_unit=d.dic_code
+	   LEFT JOIN xf_user u ON a.creater=u.id
+	   WHERE 
+	    a.type=#{type}
+	   and d.dic_group=#{dicGroup}
+	   and (t.id in (${traceId})
+		<if test="notraceId==1" >
+			or a.process_id = 1 or a.undertake_id=0
+		</if>
+		)
+	</select>
+	
+	
+	<select id="getxfAttachmentList" resultMap="ResultMapXfAttachment" parameterType="com.netintech.xfquartz.bean.XfAttachment">
+		select *
+ 		from xf_attachment where 1=1
+ 		<include refid="XfAttachment_where" /> 
+	</select>
+	
+	<select id="findDatabyMatterId" resultMap="ResultMapXfAttachment" parameterType="Integer">
+		select * from xf_attachment where id=(select max(id) from xf_attachment where type="C") and matter_id=#{matterId}
+	</select>
+
+	<!-- 市局办理报告查询总数 -->
+	<select id="queryXfMattersPresentationCount" parameterType="map" resultType="int">
+		select count(1) from
+		(SELECT a.create_time,m.xf_name FROM xf_attachment a
+		left join xf_matters m on a.matter_id=m.id
+		where 1=1
+		<if test="credentials != null and credentials != ''" >
+			and m.credentials like '%${credentials}%'
+		</if>
+		<if test="xfName != null and xfName != ''" >
+			and m.xf_name like '%${xfName}%'
+		</if>
+		<if test="contact != null and contact != ''" >
+			and m.contact like '%${contact}%'
+		</if>
+		<if test="xfSource != null and xfSource != ''" >
+			and m.xf_source = #{xfSource}
+		</if>
+		<if test="xfAppeal != null and xfAppeal != ''" >
+			and m.xf_appeal like '%${xfAppeal}%'
+		</if>
+		<if test="order != null and order != ''" >
+			and m.`order` = #{order}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			AND m.xf_date  &gt;= str_to_date('${startTime}','%Y-%m-%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND m.xf_date  &lt;= str_to_date('${endTime}','%Y-%m-%d')+1
+		</if>
+		<if test="fileName != null and fileName != ''" >
+			and a.name like '%${fileName}%'
+		</if>
+		<if test="fileType != null and fileType != ''" >
+			and a.type = #{fileType}
+		</if>
+		) b
+	</select>
+
+	<!-- 市局办理报告 分页列表 -->
+	<!--<select id="queryXfMattersPresentationList" parameterType="map" resultType="com.netintech.system.dto.XfAttachmentDto">-->
+		<!--select b.* from-->
+		<!--(SELECT a.create_time as createTime,m.xf_name as userName,-->
+		<!--concat('(', m.xf_year,')', m.`order`,'号')  as strOrder,-->
+		<!--a.id as id,-->
+		<!--a.name,-->
+		<!--a.file-->
+		<!--FROM  xf_attachment a-->
+		<!--left join xf_matters m on a.matter_id=m.id-->
+		<!--where 1=1-->
+		<!--<if test="credentials != null and credentials != ''" >-->
+			<!--and m.credentials like '%${credentials}%'-->
+		<!--</if>-->
+		<!--<if test="xfName != null and xfName != ''" >-->
+			<!--and m.xf_name like '%${xfName}%'-->
+		<!--</if>-->
+		<!--<if test="contact != null and contact != ''" >-->
+			<!--and m.contact like '%${contact}%'-->
+		<!--</if>-->
+		<!--<if test="xfSource != null and xfSource != ''" >-->
+			<!--and m.xf_source = #{xfSource}-->
+		<!--</if>-->
+		<!--<if test="xfAppeal != null and xfAppeal != ''" >-->
+			<!--and m.xf_appeal like '%${xfAppeal}%'-->
+		<!--</if>-->
+		<!--<if test="order != null and order != ''" >-->
+			<!--and m.`order` = #{order}-->
+		<!--</if>-->
+		<!--<if test="startTime != null and startTime != ''">-->
+			<!--AND m.xf_date  &gt;= str_to_date('${startTime}','%Y-%m-%d')-->
+		<!--</if>-->
+		<!--<if test="endTime != null and endTime != ''">-->
+			<!--AND m.xf_date  &lt;= str_to_date('${endTime}','%Y-%m-%d')+1-->
+		<!--</if>-->
+		<!--<if test="fileName != null and fileName != ''" >-->
+			<!--and a.name like '%${fileName}%'-->
+		<!--</if>-->
+		<!--<if test="fileType != null and fileType != ''" >-->
+			<!--and a.type = #{fileType}-->
+		<!--</if>-->
+		<!--order by a.create_time desc-->
+		<!--) b LIMIT #{start},#{end}-->
+	<!--</select>-->
+
+</mapper>
+

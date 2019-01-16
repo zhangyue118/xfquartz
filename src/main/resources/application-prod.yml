@@ -8,17 +8,23 @@ spring:
       type: com.alibaba.druid.pool.DruidDataSource
     second:
       username: xf110
-      password: 000
+      password: "000"
       driver-class-name: oracle.jdbc.driver.OracleDriver
-      url: jdbc:oracle:thin:@10.35.197.50:1521/orcl
+      url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.35.197.50)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.35.197.89)(PORT=1521))(LOAD_BALANCE=yes))(CONNECT_DATA=(SERVICE_NAME=orcl)))
+      type: com.alibaba.druid.pool.DruidDataSource
+    third:
+      username: qjt
+      password: netmarch
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@172.16.11.184:1521:XE
       type: com.alibaba.druid.pool.DruidDataSource
 
 server:
   port: 9083
 
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true #开启驼峰命名匹配
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true #开启驼峰命名匹配
 
 #logging:
 #  level:
@@ -28,3 +34,14 @@ mybatis:
 #          dao: debug
 #
 #debug: true
+
+project-params:
+  #获取管理员
+  admin: 19
+  #获取管理员权限
+  adminRole: 62
+  #保存文件路径
+  saveFilePath: D:/xfUpload
+  #回显文件路径
+  filePath: http://50.78.138.5:8080
+

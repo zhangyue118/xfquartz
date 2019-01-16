@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.XfFormAtachmentDao">
+
+     
+	<select id="getXfFormAtachmentList2" resultType="com.netintech.xfquartz.bean.XfFormAtachment">
+		select ID,
+           BUSINESS_NUMBER,
+           FILENAME,
+           FILES,
+           CREATE_TIME,
+           IS_FETCH from XF_FORM_ATACHMENT where IS_FETCH=0
+	</select>
+
+	<update id="updateById2" parameterType="com.netintech.xfquartz.bean.XfFormAtachment">
+        UPDATE XF_FORM_ATACHMENT
+        set IS_FETCH=1
+<!--         set FILES=#{files} -->
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	<update id="updateBatch2" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close=""
+			separator=";">
+        UPDATE 
+        XF_FORM_ATACHMENT 
+        set IS_FETCH=1
+        WHERE  
+        	 id=#{item.id}
+        </foreach>
+	</update>
+	
+
+</mapper>
+

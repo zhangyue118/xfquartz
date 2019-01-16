@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf110.Xf110WorkSignDao">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapXfWorkSign" type="com.netintech.xfquartz.bean.XfWorkSign">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="busiNumber" column="busiNumber"  jdbcType="VARCHAR"/>
+        <result property="formId" column="formId"  jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime"  jdbcType="DATE"/>
+        <result property="isHandle" column="isHandle"  jdbcType="INTEGER"/>
+	</resultMap>
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库所有字段 -->
+	<sql id="XfWorkSign_field">
+           id,
+           busiNumber,
+           formId,
+           createTime,
+           isHandle
+	</sql>
+	
+	 <!-- 声明数据库字段除id -->
+	<sql id="XfWorkSign_insertField">
+           busiNumber,
+           formId,
+           createTime,
+           isHandle
+	</sql>
+	
+	<!-- 实体类属性  -->
+	<sql id="XfWorkSign_insert">
+        	#{busiNumber} ,
+        	#{formId} ,
+        	#{createTime} ,
+        	#{isHandle} 
+	</sql>
+	
+	<sql id="XfWorkSign_insert2">
+			#{id},
+        	#{busiNumber,jdbcType=VARCHAR} ,
+        	#{formId} ,
+        	#{createTime} ,
+        	#{isHandle} 
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfWorkSign_update">
+		    <if test="busiNumber != null" >
+	            busiNumber = #{busiNumber} ,
+	        </if>
+		    <if test="formId != null" >
+	            formId = #{formId} ,
+	        </if>
+		    <if test="createTime != null" >
+	            createTime = #{createTime} ,
+	        </if>
+		    <if test="isHandle != null" >
+	            isHandle = #{isHandle} 
+	        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="XfWorkSign_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="busiNumber != null " >
+	            and busiNumber =#{busiNumber}
+	        </if>
+	        <if test="formId != null " >
+	            and formId =#{formId}
+	        </if>
+	        <if test="createTime != null " >
+	            and createTime =#{createTime}
+	        </if>
+	        <if test="isHandle != null " >
+	            and isHandle =#{isHandle}
+	        </if>
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfWorkSign" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_work_sign (
+        <include refid="XfWorkSign_insertField" />
+        ) VALUES (
+        <include refid="XfWorkSign_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from xf_work_sign where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfWorkSign">
+	 delete from xf_work_sign
+	  WHERE 1=1
+      <include refid="XfWorkSign_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from xf_work_sign
+	  WHERE 1=1
+      <include refid="XfWorkSign_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfWorkSign">
+        UPDATE xf_work_sign
+        <set>
+	        <include refid="XfWorkSign_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapXfWorkSign" parameterType="map">
+		select <include refid="XfWorkSign_field" />
+ 		from xf_work_sign where 1=1
+ 		<include refid="XfWorkSign_where" /> 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listByEntity" resultMap="ResultMapXfWorkSign" parameterType="com.netintech.xfquartz.bean.XfWorkSign">
+		select <include refid="XfWorkSign_field" />
+ 		from xf_work_sign where 1=1
+ 		<include refid="XfWorkSign_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapXfWorkSign" parameterType="java.lang.Integer">
+		select 	<include refid="XfWorkSign_field" />
+ 		from xf_work_sign 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapXfWorkSign" parameterType="map">
+		select <include refid="XfWorkSign_field" />
+ 		from xf_work_sign where 1=1
+ 		<include refid="XfWorkSign_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapXfWorkSign" parameterType="com.netintech.xfquartz.bean.XfWorkSign">
+		select <include refid="XfWorkSign_field" />
+ 		from xf_work_sign where 1=1
+ 		<include refid="XfWorkSign_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO xf_work_sign (
+        <include refid="XfWorkSign_insertField" />
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			
+	            #{item.busiNumber} ,
+	            #{item.formId} ,
+	            #{item.createTime} ,
+	            #{item.isHandle} 
+			
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        xf_work_sign 
+        <set>
+		    <if test="item.busiNumber != null" >
+	        busiNumber = #{item.busiNumber},
+	        </if>
+		    <if test="item.formId != null" >
+	        formId = #{item.formId},
+	        </if>
+		    <if test="item.createTime != null" >
+	        createTime = #{item.createTime},
+	        </if>
+		    <if test="item.isHandle != null" >
+	        isHandle = #{item.isHandle}
+	        </if>
+	    </set>
+        WHERE  
+        	 id=#{id}
+        </foreach>    
+	</update>
+	
+	
+	 <!--查询总数  -->
+	<select id="getXfWorkSignCount"  parameterType="map" resultType="int">
+	     SELECT count(1) FROM xf_work_sign 
+	     where 1=1 
+          <if test="keyword!=null and keyword!=''">
+	      </if>
+	</select>
+	
+	 <!--查询列表  -->
+	<select id="getXfWorkSignList"  parameterType="map"  resultType="com.netintech.xfquartz.bean.XfWorkSign">
+	   SELECT * FROM xf_work_sign
+       where isHandle=0
+	    <if test="keyword!=null and keyword!=''">
+	    </if>
+	</select>   
+	
+	<!-- 批量删除 -->
+	<delete id="exDelete" parameterType="String">
+	  delete from xf_work_sign
+	   where id in (1)
+	</delete>
+	
+	
+	<insert id="insert2" parameterType="com.netintech.xfquartz.bean.XfWorkSign" useGeneratedKeys="true" keyProperty="guid">
+		<selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">  
+                SELECT xf110.Nextval as ID from DUAL  
+        </selectKey>
+        INSERT INTO xf_work_sign (
+        <include refid="XfWorkSign_field" />
+        ) VALUES (
+        <include refid="XfWorkSign_insert2" />       
+        )
+	</insert>
+
+</mapper>
+

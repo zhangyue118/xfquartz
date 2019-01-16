@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.XfWorkDao">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapXfWork" type="com.netintech.xfquartz.bean.XfWork">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="busiNumber" column="busiNumber"  jdbcType="VARCHAR"/>
+        <result property="formId" column="formId"  jdbcType="VARCHAR"/>
+        <result property="incomingPhone" column="incomingPhone"  jdbcType="VARCHAR"/>
+        <result property="formStatusName" column="formStatusName"  jdbcType="VARCHAR"/>
+        <result property="formTypeName" column="formTypeName"  jdbcType="VARCHAR"/>
+        <result property="title" column="title"  jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime"  jdbcType="VARCHAR"/>
+        <result property="userId" column="userId"  jdbcType="VARCHAR"/>
+        <result property="planTime" column="planTime"  jdbcType="VARCHAR"/>
+        <result property="cusName" column="cusName"  jdbcType="VARCHAR"/>
+        <result property="cusSex" column="cusSex"  jdbcType="VARCHAR"/>
+        <result property="cusPhone" column="cusPhone"  jdbcType="VARCHAR"/>
+        <result property="jjcdName" column="jjcdName"  jdbcType="VARCHAR"/>
+        <result property="formOriginName" column="formOriginName"  jdbcType="VARCHAR"/>
+        <result property="businessTypeName" column="businessTypeName"  jdbcType="VARCHAR"/>
+        <result property="businessTypeChildName" column="businessTypeChildName"  jdbcType="VARCHAR"/>
+        <result property="businessTypeGrandsonName" column="businessTypeGrandsonName"  jdbcType="VARCHAR"/>
+        <result property="areaName" column="areaName"  jdbcType="VARCHAR"/>
+        <result property="busiAddress" column="busiAddress"  jdbcType="VARCHAR"/>
+        <result property="contentText" column="contentText"  jdbcType="VARCHAR"/>
+        <result property="comments" column="comments"  jdbcType="VARCHAR"/>
+        <result property="isSign" column="isSign"  jdbcType="INTEGER"/>
+        <result property="isFinish" column="isFinish"  jdbcType="INTEGER"/>
+        <result property="isFetch" column="isFetch"  jdbcType="INTEGER"/>
+        <result property="updateTime" column="updateTime"  jdbcType="DATE"/>
+        <result property="pullTime" column="pullTime"  jdbcType="DATE"/>
+        <result property="hisadv" column="hisadv"  jdbcType="VARCHAR"/>
+	</resultMap>
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库所有字段 -->
+	<sql id="XfWork_field">
+           id,
+           busiNumber,
+           formId,
+           incomingPhone,
+           formStatusName,
+           formTypeName,
+           title,
+           createTime,
+           userId,
+           planTime,
+           cusName,
+           cusSex,
+           cusPhone,
+           jjcdName,
+           formOriginName,
+           businessTypeName,
+           businessTypeChildName,
+           businessTypeGrandsonName,
+           areaName,
+           busiAddress,
+           contentText,
+           comments,
+           isSign,
+           isFinish,
+           isFetch,
+           updateTime,
+           pullTime,
+           hisadv
+	</sql>
+	
+	 <!-- 声明数据库字段除id -->
+	<sql id="XfWork_insertField">
+           busiNumber,
+           formId,
+           incomingPhone,
+           formStatusName,
+           formTypeName,
+           title,
+           createTime,
+           userId,
+           planTime,
+           cusName,
+           cusSex,
+           cusPhone,
+           jjcdName,
+           formOriginName,
+           businessTypeName,
+           businessTypeChildName,
+           businessTypeGrandsonName,
+           areaName,
+           busiAddress,
+           contentText,
+           comments,
+           isSign,
+           isFinish,
+           isFetch,
+           updateTime,
+           pullTime,
+           hisadv
+	</sql>
+	
+	<!-- 实体类属性  -->
+	<sql id="XfWork_insert">
+        	#{busiNumber} ,
+        	#{formId} ,
+        	#{incomingPhone} ,
+        	#{formStatusName} ,
+        	#{formTypeName} ,
+        	#{title} ,
+        	#{createTime} ,
+        	#{userId} ,
+        	#{planTime} ,
+        	#{cusName} ,
+        	#{cusSex} ,
+        	#{cusPhone} ,
+        	#{jjcdName} ,
+        	#{formOriginName} ,
+        	#{businessTypeName} ,
+        	#{businessTypeChildName} ,
+        	#{businessTypeGrandsonName} ,
+        	#{areaName} ,
+        	#{busiAddress} ,
+        	#{contentText} ,
+        	#{comments} ,
+        	#{isSign} ,
+        	#{isFinish} ,
+        	#{isFetch} ,
+        	#{updateTime} ,
+        	#{pullTime} ,
+        	#{hisadv}
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfWork_update">
+		    <if test="busiNumber != null" >
+	            busiNumber = #{busiNumber} ,
+	        </if>
+		    <if test="formId != null" >
+	            formId = #{formId} ,
+	        </if>
+		    <if test="incomingPhone != null" >
+	            incomingPhone = #{incomingPhone} ,
+	        </if>
+		    <if test="formStatusName != null" >
+	            formStatusName = #{formStatusName} ,
+	        </if>
+		    <if test="formTypeName != null" >
+	            formTypeName = #{formTypeName} ,
+	        </if>
+		    <if test="title != null" >
+	            title = #{title} ,
+	        </if>
+		    <if test="createTime != null" >
+	            createTime = #{createTime} ,
+	        </if>
+		    <if test="userId != null" >
+	            userId = #{userId} ,
+	        </if>
+		    <if test="planTime != null" >
+	            planTime = #{planTime} ,
+	        </if>
+		    <if test="cusName != null" >
+	            cusName = #{cusName} ,
+	        </if>
+		    <if test="cusSex != null" >
+	            cusSex = #{cusSex} ,
+	        </if>
+		    <if test="cusPhone != null" >
+	            cusPhone = #{cusPhone} ,
+	        </if>
+		    <if test="jjcdName != null" >
+	            jjcdName = #{jjcdName} ,
+	        </if>
+		    <if test="formOriginName != null" >
+	            formOriginName = #{formOriginName} ,
+	        </if>
+		    <if test="businessTypeName != null" >
+	            businessTypeName = #{businessTypeName} ,
+	        </if>
+		    <if test="businessTypeChildName != null" >
+	            businessTypeChildName = #{businessTypeChildName} ,
+	        </if>
+		    <if test="businessTypeGrandsonName != null" >
+	            businessTypeGrandsonName = #{businessTypeGrandsonName} ,
+	        </if>
+		    <if test="areaName != null" >
+	            areaName = #{areaName} ,
+	        </if>
+		    <if test="busiAddress != null" >
+	            busiAddress = #{busiAddress} ,
+	        </if>
+		    <if test="contentText != null" >
+	            contentText = #{contentText} ,
+	        </if>
+		    <if test="comments != null" >
+	            comments = #{comments} ,
+	        </if>
+		    <if test="isSign != null" >
+	            isSign = #{isSign} ,
+	        </if>
+		    <if test="isFinish != null" >
+	            isFinish = #{isFinish} ,
+	        </if>
+		    <if test="isFetch != null" >
+	            isFetch = #{isFetch} ,
+	        </if>
+		    <if test="updateTime != null" >
+	            updateTime = #{updateTime} ,
+	        </if>
+		    <if test="pullTime != null" >
+	            pullTime = #{pullTime} ,
+	        </if>
+	        <if test="hisadv != null" >
+	            hisadv = #{hisadv}
+	        </if>
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfWork_update2">
+		    <if test="busiNumber != null" >
+	            busiNumber = #{busiNumber} ,
+	        </if>
+		    <if test="formId != null" >
+	            formId = #{formId} ,
+	        </if>
+		    <if test="incomingPhone != null" >
+	            incomingPhone = #{incomingPhone} ,
+	        </if>
+		    <if test="formStatusName != null" >
+	            formStatusName = #{formStatusName} ,
+	        </if>
+		    <if test="formTypeName != null" >
+	            formTypeName = #{formTypeName} ,
+	        </if>
+		    <if test="title != null" >
+	            title = #{title} ,
+	        </if>
+		    <if test="createTime != null" >
+	            createTime = #{createTime} ,
+	        </if>
+		    <if test="userId != null" >
+	            userId = #{userId} ,
+	        </if>
+		    <if test="planTime != null" >
+	            planTime = #{planTime} ,
+	        </if>
+		    <if test="cusName != null" >
+	            cusName = #{cusName} ,
+	        </if>
+		    <if test="cusSex != null" >
+	            cusSex = #{cusSex} ,
+	        </if>
+		    <if test="cusPhone != null" >
+	            cusPhone = #{cusPhone} ,
+	        </if>
+		    <if test="jjcdName != null" >
+	            jjcdName = #{jjcdName} ,
+	        </if>
+		    <if test="formOriginName != null" >
+	            formOriginName = #{formOriginName} ,
+	        </if>
+		    <if test="businessTypeName != null" >
+	            businessTypeName = #{businessTypeName} ,
+	        </if>
+		    <if test="businessTypeChildName != null" >
+	            businessTypeChildName = #{businessTypeChildName} ,
+	        </if>
+		    <if test="businessTypeGrandsonName != null" >
+	            businessTypeGrandsonName = #{businessTypeGrandsonName} ,
+	        </if>
+		    <if test="areaName != null" >
+	            areaName = #{areaName} ,
+	        </if>
+		    <if test="busiAddress != null" >
+	            busiAddress = #{busiAddress} ,
+	        </if>
+		    <if test="contentText != null" >
+	            contentText = #{contentText} ,
+	        </if>
+		    <if test="comments != null" >
+	            comments = #{comments} ,
+	        </if>
+		    <if test="isSign != null" >
+	            isSign = #{isSign} ,
+	        </if>
+		    <if test="isFinish != null" >
+	            isFinish = #{isFinish} ,
+	        </if>
+		    <if test="isFetch != null" >
+	            isFetch = #{isFetch} ,
+	        </if>
+		    <if test="updateTime != null" >
+	            updateTime = #{updateTime} ,
+	        </if>
+		    <if test="pullTime != null" >
+	            pullTime = #{pullTime} ,
+	        </if>
+	        <if test="hisadv != null" >
+	            hisadv = #{hisadv}
+	        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="XfWork_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="busiNumber != null " >
+	            and busiNumber =#{busiNumber}
+	        </if>
+	        <if test="formId != null " >
+	            and formId =#{formId}
+	        </if>
+	        <if test="incomingPhone != null " >
+	            and incomingPhone =#{incomingPhone}
+	        </if>
+	        <if test="formStatusName != null " >
+	            and formStatusName =#{formStatusName}
+	        </if>
+	        <if test="formTypeName != null " >
+	            and formTypeName =#{formTypeName}
+	        </if>
+	        <if test="title != null " >
+	            and title =#{title}
+	        </if>
+	        <if test="createTime != null " >
+	            and createTime =#{createTime}
+	        </if>
+	        <if test="userId != null " >
+	            and userId =#{userId}
+	        </if>
+	        <if test="planTime != null " >
+	            and planTime =#{planTime}
+	        </if>
+	        <if test="cusName != null " >
+	            and cusName =#{cusName}
+	        </if>
+	        <if test="cusSex != null " >
+	            and cusSex =#{cusSex}
+	        </if>
+	        <if test="cusPhone != null " >
+	            and cusPhone =#{cusPhone}
+	        </if>
+	        <if test="jjcdName != null " >
+	            and jjcdName =#{jjcdName}
+	        </if>
+	        <if test="formOriginName != null " >
+	            and formOriginName =#{formOriginName}
+	        </if>
+	        <if test="businessTypeName != null " >
+	            and businessTypeName =#{businessTypeName}
+	        </if>
+	        <if test="businessTypeChildName != null " >
+	            and businessTypeChildName =#{businessTypeChildName}
+	        </if>
+	        <if test="businessTypeGrandsonName != null " >
+	            and businessTypeGrandsonName =#{businessTypeGrandsonName}
+	        </if>
+	        <if test="areaName != null " >
+	            and areaName =#{areaName}
+	        </if>
+	        <if test="busiAddress != null " >
+	            and busiAddress =#{busiAddress}
+	        </if>
+	        <if test="contentText != null " >
+	            and contentText =#{contentText}
+	        </if>
+	        <if test="comments != null " >
+	            and comments =#{comments}
+	        </if>
+	        <if test="isSign != null " >
+	            and isSign =#{isSign}
+	        </if>
+	        <if test="isFinish != null " >
+	            and isFinish =#{isFinish}
+	        </if>
+	        <if test="isFetch != null " >
+	            and isFetch =#{isFetch}
+	        </if>
+	        <if test="updateTime != null " >
+	            and updateTime =#{updateTime}
+	        </if>
+	        <if test="pullTime != null " >
+	            and pullTime =#{pullTime}
+	        </if>
+	        <if test="hisadv != null " >
+	            and hisadv =#{hisadv}
+	        </if>
+
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfWork" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_work (
+        <include refid="XfWork_insertField" />
+        ) VALUES (
+        <include refid="XfWork_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from xf_work where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfWork">
+	 delete from xf_work
+	  WHERE 1=1
+      <include refid="XfWork_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from xf_work
+	  WHERE 1=1
+      <include refid="XfWork_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfWork">
+        UPDATE xf_work
+        <set>
+	        <include refid="XfWork_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapXfWork" parameterType="map">
+		select <include refid="XfWork_field" />
+ 		from xf_work where 1=1
+ 		<include refid="XfWork_where" /> 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listByEntity" resultMap="ResultMapXfWork" parameterType="com.netintech.xfquartz.bean.XfWork">
+		select <include refid="XfWork_field" />
+ 		from xf_work where 1=1
+ 		<include refid="XfWork_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapXfWork" parameterType="java.lang.Integer">
+		select 	<include refid="XfWork_field" />
+ 		from xf_work 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapXfWork" parameterType="map">
+		select <include refid="XfWork_field" />
+ 		from xf_work where 1=1
+ 		<include refid="XfWork_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapXfWork" parameterType="com.netintech.xfquartz.bean.XfWork">
+		select <include refid="XfWork_field" />
+ 		from xf_work where 1=1
+ 		<include refid="XfWork_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO xf_work (
+        <include refid="XfWork_insertField" />
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			
+	            #{item.busiNumber} ,
+	            #{item.formId} ,
+	            #{item.incomingPhone} ,
+	            #{item.formStatusName} ,
+	            #{item.formTypeName} ,
+	            #{item.title} ,
+	            #{item.createTime} ,
+	            #{item.userId} ,
+	            #{item.planTime} ,
+	            #{item.cusName} ,
+	            #{item.cusSex} ,
+	            #{item.cusPhone} ,
+	            #{item.jjcdName} ,
+	            #{item.formOriginName} ,
+	            #{item.businessTypeName} ,
+	            #{item.businessTypeChildName} ,
+	            #{item.businessTypeGrandsonName} ,
+	            #{item.areaName} ,
+	            #{item.busiAddress} ,
+	            #{item.contentText} ,
+	            #{item.comments} ,
+	            #{item.isSign} ,
+	            #{item.isFinish} ,
+	            #{item.isFetch} ,
+	            #{item.updateTime} ,
+	            #{item.pullTime} 
+			
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        xf_work 
+        <set>
+		    <if test="item.busiNumber != null" >
+	        busiNumber = #{item.busiNumber},
+	        </if>
+		    <if test="item.formId != null" >
+	        formId = #{item.formId},
+	        </if>
+		    <if test="item.incomingPhone != null" >
+	        incomingPhone = #{item.incomingPhone},
+	        </if>
+		    <if test="item.formStatusName != null" >
+	        formStatusName = #{item.formStatusName},
+	        </if>
+		    <if test="item.formTypeName != null" >
+	        formTypeName = #{item.formTypeName},
+	        </if>
+		    <if test="item.title != null" >
+	        title = #{item.title},
+	        </if>
+		    <if test="item.createTime != null" >
+	        createTime = #{item.createTime},
+	        </if>
+		    <if test="item.userId != null" >
+	        userId = #{item.userId},
+	        </if>
+		    <if test="item.planTime != null" >
+	        planTime = #{item.planTime},
+	        </if>
+		    <if test="item.cusName != null" >
+	        cusName = #{item.cusName},
+	        </if>
+		    <if test="item.cusSex != null" >
+	        cusSex = #{item.cusSex},
+	        </if>
+		    <if test="item.cusPhone != null" >
+	        cusPhone = #{item.cusPhone},
+	        </if>
+		    <if test="item.jjcdName != null" >
+	        jjcdName = #{item.jjcdName},
+	        </if>
+		    <if test="item.formOriginName != null" >
+	        formOriginName = #{item.formOriginName},
+	        </if>
+		    <if test="item.businessTypeName != null" >
+	        businessTypeName = #{item.businessTypeName},
+	        </if>
+		    <if test="item.businessTypeChildName != null" >
+	        businessTypeChildName = #{item.businessTypeChildName},
+	        </if>
+		    <if test="item.businessTypeGrandsonName != null" >
+	        businessTypeGrandsonName = #{item.businessTypeGrandsonName},
+	        </if>
+		    <if test="item.areaName != null" >
+	        areaName = #{item.areaName},
+	        </if>
+		    <if test="item.busiAddress != null" >
+	        busiAddress = #{item.busiAddress},
+	        </if>
+		    <if test="item.contentText != null" >
+	        contentText = #{item.contentText},
+	        </if>
+		    <if test="item.comments != null" >
+	        comments = #{item.comments},
+	        </if>
+		    <if test="item.isSign != null" >
+	        isSign = #{item.isSign},
+	        </if>
+		    <if test="item.isFinish != null" >
+	        isFinish = #{item.isFinish},
+	        </if>
+		    <if test="item.isFetch != null" >
+	        isFetch = #{item.isFetch},
+	        </if>
+		    <if test="item.updateTime != null" >
+	        updateTime = #{item.updateTime},
+	        </if>
+		    <if test="item.pullTime != null" >
+	        pullTime = #{item.pullTime}
+	        </if>
+	    </set>
+        WHERE  
+        	 id=#{id}
+        </foreach>    
+	</update>
+	
+	
+	 <!--查询总数  -->
+	<select id="getXfWorkCount"  parameterType="map" resultType="int">
+	     SELECT count(1) FROM xf_work 
+	     where 1=1 
+          <if test="keyword!=null and keyword!=''">
+	      </if>
+	</select>
+	
+	 <!--查询列表  -->
+	<select id="getXfWorkList"  parameterType="map"  resultType="com.netintech.xfquartz.bean.XfWork">
+	   SELECT * FROM xf_work
+       where 1=1 
+	    <if test="keyword!=null and keyword!=''">
+	    </if>
+         LIMIT 0,1000
+	</select>   
+	
+	<!-- 批量删除 -->
+	<delete id="exDelete" parameterType="String">
+	  delete from xf_work
+	   where id in (1)
+	</delete>
+	
+	<select id="getXfWorkList2" resultType="com.netintech.xfquartz.bean.XfWork">
+		select * from xf_work where isFetch=0
+	</select>
+
+	<update id="updateById2" parameterType="com.netintech.xfquartz.bean.XfWork">
+        UPDATE xf_work
+        <set>
+	        <include refid="XfWork_update2" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>	
+	
+	<select id="getXfWorkListNoRepeat2" resultType="com.netintech.xfquartz.bean.XfWork">
+		select * from XF_WORK x,(select count(1) bb ,BUSINUMBER FROM XF_WORK GROUP BY BUSINUMBER) a WHERE x.BUSINUMBER=a.BUSINUMBER AND a.bb=1
+	</select>
+	
+	<select id="getByWorkId2" resultType="com.netintech.xfquartz.bean.XfWork">
+		select FORMSTATUSNAME formStatusName from xf_work where id=(
+		select MAX(id) from xf_work where BUSINUMBER =#{workId})
+	</select>
+
+</mapper>
+

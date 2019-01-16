@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.MatterTagDao">
+	
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapTag" type="com.netintech.xfquartz.bean.Tag">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time"  jdbcType="DATE"/>
+        <result property="tag" column="tag"  jdbcType="VARCHAR"/>
+        <result property="matterId" column="matter_id"  jdbcType="VARCHAR"/>
+        <result property="creater" column="creater"  jdbcType="VARCHAR"/>
+      
+	</resultMap>
+	 <!-- 实体类与数据库映射字段部分  end -->
+	<select id="getListByMatterId" parameterType="int" resultMap="ResultMapTag">
+		select * from xf_tag where matter_id=#{matterId}
+	</select>
+	
+	<insert id="savaTag" parameterType="com.netintech.xfquartz.bean.Tag">
+	    insert into xf_tag (tag,matter_id,create_time,creater)
+	    values(#{tag},#{matterId},#{createTime},#{creater});
+	</insert>
+	
+	<update id="updataTag" parameterType="com.netintech.xfquartz.bean.Tag">
+	    update xf_tag set tag=#{tag},matter_id=#{matterId},create_time=#{createTime},creater=#{creater}
+	    where matter_id=#{matterId}
+	</update>
+	
+	<select id="findMatterIdData" parameterType="String" resultMap="ResultMapTag">
+		select * from xf_tag where matter_id=#{matterId}
+	</select>
+</mapper>

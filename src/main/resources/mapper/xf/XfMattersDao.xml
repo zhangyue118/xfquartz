@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf.XfMattersDao">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapXfMatters" type="com.netintech.xfquartz.bean.XfMatters">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="xfDate" column="xf_date"  jdbcType="TIMESTAMP"/>
+        <result property="xfName" column="xf_name"  jdbcType="VARCHAR"/>
+        <result property="sex" column="sex"  jdbcType="VARCHAR"/>
+        <result property="age" column="Age"  jdbcType="VARCHAR"/>
+        <result property="nation" column="nation"  jdbcType="VARCHAR"/>
+        <result property="education" column="education"  jdbcType="VARCHAR"/>
+        <result property="personQty" column="person_qty"  jdbcType="INTEGER"/>
+        <result property="unit" column="unit"  jdbcType="VARCHAR"/>
+        <result property="address" column="address"  jdbcType="VARCHAR"/>
+        <result property="contact" column="contact"  jdbcType="VARCHAR"/>
+        <result property="credentials" column="credentials"  jdbcType="VARCHAR"/>
+        <result property="credentialsType" column="credentials_type"  jdbcType="VARCHAR"/>
+        <result property="xfException" column="xf_exception"  jdbcType="VARCHAR"/>
+        <result property="complaintStage" column="complaint_stage"  jdbcType="VARCHAR"/>
+        <result property="xfSource" column="xf_source"  jdbcType="VARCHAR"/>
+        <result property="xfType" column="xf_type"  jdbcType="VARCHAR"/>
+        <result property="complaintType" column="complaint_type"  jdbcType="VARCHAR"/>
+        <result property="complaintSubType" column="complaint_sub_type"  jdbcType="VARCHAR"/>
+        <result property="szComplaintType" column="sz_complaint_type"  jdbcType="VARCHAR"/>
+        <result property="xfForm" column="xf_form"  jdbcType="VARCHAR"/>
+        <result property="xfFeature" column="xf_feature"  jdbcType="VARCHAR"/>
+        <result property="xfDestination" column="xf_destination"  jdbcType="VARCHAR"/>
+        <result property="receptionLeader" column="reception_leader"  jdbcType="VARCHAR"/>
+        <result property="xfAppeal" column="xf_appeal"  jdbcType="VARCHAR"/>
+        <result property="undertakeDepartment" column="undertake_department"  jdbcType="VARCHAR"/>
+        <result property="responsibilityDepartment" column="responsibility_department"  jdbcType="VARCHAR"/>
+        <result property="concludeDeadline" column="conclude_deadline"  jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark"  jdbcType="VARCHAR"/>
+        <result property="transactManner" column="transact_manner"  jdbcType="VARCHAR"/>
+        <result property="agentPolice" column="agent_police"  jdbcType="VARCHAR"/>
+        <result property="isRepeat" column="is_repeat"  jdbcType="TINYINT"/>
+        <result property="repeatCount" column="repeat_count"  jdbcType="INTEGER"/>
+        <result property="isSfsu" column="is_sfsu"  jdbcType="TINYINT"/>
+        <result property="isPush" column="is_push"  jdbcType="TINYINT"/>
+        <result property="issueTime" column="issue_time"  jdbcType="TIMESTAMP"/>
+        <result property="handleOption" column="handle_option"  jdbcType="VARCHAR"/>
+        <result property="auditOption" column="audit_option"  jdbcType="VARCHAR"/>
+        <result property="leaderOption" column="leader_option"  jdbcType="VARCHAR"/>
+        <result property="creater" column="creater"  jdbcType="INTEGER"/>
+        <result property="state" column="state"  jdbcType="VARCHAR"/>
+        <result property="order" column="order"  jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
+        <result property="inputTime" column="input_time"  jdbcType="TIMESTAMP"/>
+        <result property="issuer" column="issuer"  jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete"  jdbcType="TINYINT"/>
+        <result property="updateTime" column="update_time"  jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater"  jdbcType="INTEGER"/>
+        <result property="permanentAddress" column="permanent_address"  jdbcType="VARCHAR"/>
+        <result property="work_id" column="work_id"  jdbcType="VARCHAR"/>
+        <result property="iszczb" column="iszczb"  jdbcType="INTEGER"/>
+        <result property="xfSourceSub" column="xf_source_sub"  jdbcType="VARCHAR"/>	
+        <result property="is110qianshou" column="is110qianshou"  jdbcType="INTEGER"/>
+        <result property="minsheng110source" column="minsheng110source"  jdbcType="VARCHAR"/>
+        <result property="minsheng110comments" column="minsheng110comments"  jdbcType="VARCHAR"/>
+        <result property="hisadv" column="hisadv"  jdbcType="VARCHAR"/>
+        <result property="ms110concludeDeadline" column="ms110conclude_deadline"  jdbcType="TIMESTAMP"/>
+        <result property="ms110addcontent" column="ms110addcontent"  jdbcType="VARCHAR"/>
+        <result property="isexport" column="isexport"  jdbcType="INTEGER"/>
+        <result property="is_law" column="is_law"  jdbcType="VARCHAR"/>
+        <result property="xfYear" column="xf_year"  jdbcType="INTEGER"/>
+	</resultMap>  
+	
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库所有字段 -->
+	<sql id="XfMatters_field">
+           id,
+           xf_date,
+           xf_name,
+           sex,
+           Age,
+           nation,
+           education,
+           person_qty,
+           unit,
+           address,
+           contact,
+           credentials,
+           credentials_type,
+           xf_exception,
+           complaint_stage,
+           xf_source,
+           xf_type,
+           complaint_type,
+           complaint_sub_type,
+           sz_complaint_type,
+           xf_form,
+           xf_feature,
+           xf_destination,
+           reception_leader,
+           xf_appeal,
+           undertake_department,
+           responsibility_department,
+           conclude_deadline,
+           remark,
+           transact_manner,
+           agent_police,
+           is_repeat,
+           repeat_count,
+           is_sfsu,
+           is_push,
+           issue_time,
+           handle_option,
+           audit_option,
+           leader_option,
+           creater,
+           state,
+           `order`,
+           create_time,
+           input_time,
+           `issuer`,
+           is_delete,
+           update_time,
+           updater,
+           permanent_address,
+           is_law,
+           work_id,
+           iszczb,
+           xf_source_sub,
+           is110qianshou,
+           minsheng110source,
+           minsheng110comments,
+           hisadv,
+           ms110conclude_deadline,
+           ms110addcontent,
+           isexport,
+           xf_year
+	</sql>
+	
+	 <!-- 声明数据库字段除id -->
+	<sql id="XfMatters_insertField">
+           xf_date,
+           xf_name,
+           sex,
+           Age,
+           nation,
+           education,
+           person_qty,
+           unit,
+           address,
+           contact,
+           credentials,
+           credentials_type,
+           xf_exception,
+           complaint_stage,
+           xf_source,
+           xf_type,
+           complaint_type,
+           complaint_sub_type,
+           sz_complaint_type,
+           xf_form,
+           xf_feature,
+           xf_destination,
+           reception_leader,
+           xf_appeal,
+           undertake_department,
+           responsibility_department,
+           conclude_deadline,
+           remark,
+           transact_manner,
+           agent_police,
+           is_repeat,
+           repeat_count,
+           is_sfsu,
+           is_push,
+           issue_time,
+           handle_option,
+           audit_option,
+           leader_option,
+           creater,
+           state,
+           `order`,
+           create_time,
+           input_time,
+           `issuer`,
+           is_delete,
+           update_time,
+           updater,
+           permanent_address,
+           is_law,
+           work_id,
+           iszczb,
+           xf_source_sub,
+           is110qianshou,
+           minsheng110source,
+           minsheng110comments,
+           hisadv,
+           ms110conclude_deadline,
+           ms110addcontent,
+           isexport,
+           xf_year
+	</sql>
+	
+	<!-- 实体类属性  -->
+	<sql id="XfMatters_insert">
+        	#{xfDate} ,
+        	#{xfName} ,
+        	#{sex} ,
+        	#{age} ,
+        	#{nation} ,
+        	#{education} ,
+        	#{personQty} ,
+        	#{unit} ,
+        	#{address} ,
+        	#{contact} ,
+        	#{credentials} ,
+        	#{credentialsType} ,
+        	#{xfException} ,
+        	#{complaintStage} ,
+        	#{xfSource} ,
+        	#{xfType} ,
+        	#{complaintType} ,
+        	#{complaintSubType} ,
+        	#{szComplaintType} ,
+        	#{xfForm} ,
+        	#{xfFeature} ,
+        	#{xfDestination} ,
+        	#{receptionLeader} ,
+        	#{xfAppeal} ,
+        	#{undertakeDepartment} ,
+        	#{responsibilityDepartment} ,
+        	#{concludeDeadline} ,
+        	#{remark} ,
+        	#{transactManner} ,
+        	#{agentPolice} ,
+        	#{isRepeat} ,
+        	#{repeatCount} ,
+        	#{isSfsu} ,
+        	#{isPush} ,
+        	#{issueTime} ,
+        	#{handleOption} ,
+        	#{auditOption} ,
+        	#{leaderOption} ,
+        	#{creater} ,
+        	#{state} ,
+        	#{order} ,
+        	#{createTime} ,
+        	#{inputTime} ,
+        	#{issuer} ,
+        	#{isDelete},
+        	#{updateTime},
+        	#{updater},
+        	#{permanentAddress},
+        	#{is_law},
+        	#{work_id},
+        	#{iszczb},
+        	#{xfSourceSub},
+        	#{is110qianshou},
+        	#{minsheng110source},
+        	#{minsheng110comments},
+        	#{hisadv},
+        	#{ms110concludeDeadline} ,
+        	#{ms110addcontent},
+        	#{isexport},
+        	#{xfYear}
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfMatters_update">
+		    <if test="xfDate != null" >
+	            xf_date = #{xfDate} ,
+	        </if>
+		    <if test="xfName != null" >
+	            xf_name = #{xfName} ,
+	        </if>
+		    <if test="sex != null" >
+	            sex = #{sex} ,
+	        </if>
+		    <if test="age != null" >
+	            Age = #{age} ,
+	        </if>
+		    <if test="nation != null" >
+	            nation = #{nation} ,
+	        </if>
+		    <if test="education != null" >
+	            education = #{education} ,
+	        </if>
+		    <if test="personQty != null" >
+	            person_qty = #{personQty} ,
+	        </if>
+		    <if test="unit != null" >
+	            unit = #{unit} ,
+	        </if>
+		    <if test="address != null" >
+	            address = #{address} ,
+	        </if>
+		    <if test="contact != null" >
+	            contact = #{contact} ,
+	        </if>
+		    <if test="credentials != null" >
+	            credentials = #{credentials} ,
+	        </if>
+		    <if test="credentialsType != null" >
+	            credentials_type = #{credentialsType} ,
+	        </if>
+		    <if test="xfException != null" >
+	            xf_exception = #{xfException} ,
+	        </if>
+		    <if test="complaintStage != null" >
+	            complaint_stage = #{complaintStage} ,
+	        </if>
+		    <if test="xfSource != null" >
+	            xf_source = #{xfSource} ,
+	        </if>
+		    <if test="xfType != null" >
+	            xf_type = #{xfType} ,
+	        </if>
+		    <if test="complaintType != null" >
+	            complaint_type = #{complaintType} ,
+	        </if>
+		    <if test="complaintSubType != null" >
+	            complaint_sub_type = #{complaintSubType} ,
+	        </if>
+		    <if test="szComplaintType != null" >
+	            sz_complaint_type = #{szComplaintType} ,
+	        </if>
+		    <if test="xfForm != null" >
+	            xf_form = #{xfForm} ,
+	        </if>
+		    <if test="xfFeature != null" >
+	            xf_feature = #{xfFeature} ,
+	        </if>
+		    <if test="xfDestination != null" >
+	            xf_destination = #{xfDestination} ,
+	        </if>
+		    <if test="receptionLeader != null" >
+	            reception_leader = #{receptionLeader} ,
+	        </if>
+		    <if test="xfAppeal != null" >
+	            xf_appeal = #{xfAppeal} ,
+	        </if>
+		    <if test="undertakeDepartment != null" >
+	            undertake_department = #{undertakeDepartment} ,
+	        </if>
+		    <if test="responsibilityDepartment != null" >
+	            responsibility_department = #{responsibilityDepartment} ,
+	        </if>
+		    <if test="concludeDeadline != null">
+	            conclude_deadline = #{concludeDeadline} ,
+	        </if>
+		    <if test="remark != null" >
+	            remark = #{remark} ,
+	        </if>
+		    <if test="transactManner != null" >
+	            transact_manner = #{transactManner} ,
+	        </if>
+		    <if test="agentPolice != null" >
+	            agent_police = #{agentPolice} ,
+	        </if>
+		    <if test="isRepeat != null" >
+	            is_repeat = #{isRepeat} ,
+	        </if>
+		    <if test="repeatCount != null" >
+	            repeat_count = #{repeatCount} ,
+	        </if>
+		    <if test="isSfsu != null" >
+	            is_sfsu = #{isSfsu} ,
+	        </if>
+		    <if test="isPush != null" >
+	            is_push = #{isPush} ,
+	        </if>
+		    <if test="issueTime != null" >
+	            issue_time = #{issueTime} ,
+	        </if>
+		    <if test="handleOption != null" >
+	            handle_option = #{handleOption} ,
+	        </if>
+		    <if test="auditOption != null" >
+	            audit_option = #{auditOption} ,
+	        </if>
+		    <if test="leaderOption != null" >
+	            leader_option = #{leaderOption} ,
+	        </if>
+		    <if test="creater != null" >
+	            creater = #{creater} ,
+	        </if>
+		    <if test="state != null" >
+	            state = #{state} ,
+	        </if>
+		    <if test="order != null" >
+	            `order` = #{order} ,
+	        </if>
+		    <if test="createTime != null" >
+	            create_time = #{createTime} ,
+	        </if>
+		    <if test="inputTime != null" >
+	            input_time = #{inputTime} ,
+	        </if>
+		    <if test="issuer != null" >
+	            `issuer` = #{issuer} ,
+	        </if>
+		    <if test="isDelete != null" >
+	            is_delete = #{isDelete} ,
+	        </if>
+	         <if test="updateTime != null" >
+	            update_time = #{updateTime} ,
+	        </if>
+		    <if test="updater != null" >
+	            updater = #{updater} ,
+	        </if>
+		    <if test="permanentAddress != null" >
+	            permanent_address = #{permanentAddress} ,
+	        </if>
+	        <if test="is_law != '0'" >
+	            is_law = #{is_law} , 
+	        </if>
+	        <if test="source_order != null" >
+	            source_order = #{source_order} ,
+	        </if>
+	        <if test="iszczb != null" >
+	            iszczb = #{iszczb} ,
+	        </if>
+	        <if test="xfSourceSub != null" >
+	            xf_source_sub = #{xfSourceSub} ,
+	        </if>
+	        <if test="is110qianshou != null" >
+	            is110qianshou = #{is110qianshou} ,
+	        </if>
+	        <if test="minsheng110source != null" >
+	            minsheng110source = #{minsheng110source} ,
+	        </if>
+	        <if test="minsheng110comments != null" >
+	            minsheng110comments = #{minsheng110comments} ,
+	        </if>
+	        <if test="hisadv != null" >
+	            hisadv = #{hisadv} ,
+	        </if>
+	        <if test="ms110concludeDeadline != null" >
+	            ms110conclude_deadline = #{ms110concludeDeadline} ,
+	        </if>
+	        <if test="ms110addcontent != null" >
+	            ms110addcontent = #{ms110addcontent} ,
+	        </if>
+	        <if test="isexport != null" >
+	            isexport = #{isexport} ,
+	        </if>
+	        <if test="xfYear != null" >
+	            xf_year = #{xfYear} 
+	        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="XfMatters_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="xfDate != null " >
+	            and xf_date =#{xfDate}
+	        </if>
+	        <if test="xfName != null " >
+	            and xf_name =#{xfName}
+	        </if>
+	        <if test="sex != null " >
+	            and sex =#{sex}
+	        </if>
+	        <if test="age != null " >
+	            and Age =#{age}
+	        </if>
+	        <if test="nation != null " >
+	            and nation =#{nation}
+	        </if>
+	        <if test="education != null " >
+	            and education =#{education}
+	        </if>
+	        <if test="personQty != null " >
+	            and person_qty =#{personQty}
+	        </if>
+	        <if test="unit != null " >
+	            and unit =#{unit}
+	        </if>
+	        <if test="address != null " >
+	            and address =#{address}
+	        </if>
+	        <if test="contact != null " >
+	            and contact =#{contact}
+	        </if>
+	        <if test="credentials != null " >
+	            and credentials =#{credentials}
+	        </if>
+	        <if test="credentialsType != null " >
+	            and credentials_type =#{credentialsType}
+	        </if>
+	        <if test="xfException != null " >
+	            and xf_exception =#{xfException}
+	        </if>
+	        <if test="complaintStage != null " >
+	            and complaint_stage =#{complaintStage}
+	        </if>
+	        <if test="xfSource != null " >
+	            and xf_source =#{xfSource}
+	        </if>
+	        <if test="xfType != null " >
+	            and xf_type =#{xfType}
+	        </if>
+	        <if test="complaintType != null " >
+	            and complaint_type =#{complaintType}
+	        </if>
+	        <if test="complaintSubType != null " >
+	            and complaint_sub_type =#{complaintSubType}
+	        </if>
+	        <if test="szComplaintType != null " >
+	            and sz_complaint_type =#{szComplaintType}
+	        </if>
+	        <if test="xfForm != null " >
+	            and xf_form =#{xfForm}
+	        </if>
+	        <if test="xfFeature != null " >
+	            and xf_feature =#{xfFeature}
+	        </if>
+	        <if test="xfDestination != null " >
+	            and xf_destination =#{xfDestination}
+	        </if>
+	        <if test="receptionLeader != null " >
+	            and reception_leader =#{receptionLeader}
+	        </if>
+	        <if test="xfAppeal != null " >
+	            and xf_appeal =#{xfAppeal}
+	        </if>
+	        <if test="undertakeDepartment != null " >
+	            and undertake_department =#{undertakeDepartment}
+	        </if>
+	        <if test="responsibilityDepartment != null " >
+	            and responsibility_department =#{responsibilityDepartment}
+	        </if>
+	        <if test="concludeDeadline != null " >
+	            and conclude_deadline =#{concludeDeadline}
+	        </if>
+	        <if test="remark != null " >
+	            and remark =#{remark}
+	        </if>
+	        <if test="transactManner != null " >
+	            and transact_manner =#{transactManner}
+	        </if>
+	        <if test="agentPolice != null " >
+	            and agent_police =#{agentPolice}
+	        </if>
+	        <if test="isRepeat != null " >
+	            and is_repeat =#{isRepeat}
+	        </if>
+	        <if test="repeatCount != null " >
+	            and repeat_count =#{repeatCount}
+	        </if>
+	        <if test="isSfsu != null " >
+	            and is_sfsu =#{isSfsu}
+	        </if>
+	        <if test="isPush != null " >
+	            and is_push =#{isPush}
+	        </if>
+	        <if test="issueTime != null " >
+	            and issue_time =#{issueTime}
+	        </if>
+	        <if test="handleOption != null " >
+	            and handle_option =#{handleOption}
+	        </if>
+	        <if test="auditOption != null " >
+	            and audit_option =#{auditOption}
+	        </if>
+	        <if test="leaderOption != null " >
+	            and leader_option =#{leaderOption}
+	        </if>
+	        <if test="creater != null " >
+	            and creater =#{creater}
+	        </if>
+	        <if test="state != null " >
+	            and state =#{state}
+	        </if>
+	        <if test="order != null " >
+	            and `order` =#{order}
+	        </if>
+	        <if test="createTime != null " >
+	            and create_time =#{createTime}
+	        </if>
+	        <if test="inputTime != null " >
+	            and input_time =#{inputTime}
+	        </if>
+	        <if test="issuer != null " >
+	            and `issuer` =#{issuer}
+	        </if>
+	        <if test="isDelete != null " >
+	            and is_delete =#{isDelete}
+	        </if>
+	         <if test="updateTime != null" >
+	            and update_time = #{updateTime} 
+	        </if>
+		    <if test="updater != null" >
+	            and updater = #{updater} 
+	        </if>
+		    <if test="permanentAddress != null" >
+	            and permanent_address = #{permanentAddress} 
+	        </if>
+	        <if test="iszczb != null" >
+	            and iszczb = #{iszczb} 
+	        </if>
+	        <if test="xfSourceSub != null" >
+	            and xf_source_sub = #{xfSourceSub} 
+	        </if>
+	        <if test="is110qianshou != null" >
+	            and is110qianshou = #{is110qianshou} 
+	        </if>
+	        <if test="minsheng110source != null" >
+	            and minsheng110source = #{minsheng110source} 
+	        </if>
+	        <if test="minsheng110comments != null" >
+	            and minsheng110comments = #{minsheng110comments} 
+	        </if>
+	        <if test="hisadv != null" >
+	            and hisadv = #{hisadv} 
+	        </if>
+	        <if test="ms110concludeDeadline != null" >
+	            and ms110conclude_deadline = #{ms110concludeDeadline} 
+	        </if>
+	        <if test="ms110addcontent != null" >
+	            and ms110addcontent = #{ms110addcontent} 
+	        </if>
+	        <if test="xfYear != null" >
+	            and xf_year = #{xfYear} 
+	        </if>
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfMatters" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_matters (
+        <include refid="XfMatters_insertField" />
+        ) VALUES (
+        <include refid="XfMatters_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from xf_matters where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfMatters">
+	 delete from xf_matters
+	  WHERE 1=1
+      <include refid="XfMatters_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from xf_matters
+	  WHERE 1=1
+      <include refid="XfMatters_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfMatters">
+        UPDATE xf_matters
+        <set>
+	        <include refid="XfMatters_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapXfMatters" parameterType="map">
+		select <include refid="XfMatters_field" />
+ 		from xf_matters where 1=1
+ 		<include refid="XfMatters_where" /> 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listByEntity" resultMap="ResultMapXfMatters" parameterType="com.netintech.xfquartz.bean.XfMatters">
+		select <include refid="XfMatters_field" />
+ 		from xf_matters where 1=1
+ 		<include refid="XfMatters_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapXfMatters" parameterType="java.lang.Integer">
+		select 	<include refid="XfMatters_field" />
+ 		from xf_matters 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapXfMatters" parameterType="map">
+		select <include refid="XfMatters_field" />
+ 		from xf_matters where 1=1
+ 		<include refid="XfMatters_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapXfMatters" parameterType="com.netintech.xfquartz.bean.XfMatters">
+		select <include refid="XfMatters_field" />
+ 		from xf_matters where 1=1
+ 		<include refid="XfMatters_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO xf_matters (
+        <include refid="XfMatters_insertField" />
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			
+	            #{item.xfDate} ,
+	            #{item.xfName} ,
+	            #{item.sex} ,
+	            #{item.age} ,
+	            #{item.nation} ,
+	            #{item.education} ,
+	            #{item.personQty} ,
+	            #{item.unit} ,
+	            #{item.address} ,
+	            #{item.contact} ,
+	            #{item.credentials} ,
+	            #{item.credentialsType} ,
+	            #{item.xfException} ,
+	            #{item.complaintStage} ,
+	            #{item.xfSource} ,
+	            #{item.xfType} ,
+	            #{item.complaintType} ,
+	            #{item.complaintSubType} ,
+	            #{item.szComplaintType} ,
+	            #{item.xfForm} ,
+	            #{item.xfFeature} ,
+	            #{item.xfDestination} ,
+	            #{item.receptionLeader} ,
+	            #{item.xfAppeal} ,
+	            #{item.undertakeDepartment} ,
+	            #{item.responsibilityDepartment} ,
+	            #{item.concludeDeadline} ,
+	            #{item.remark} ,
+	            #{item.transactManner} ,
+	            #{item.agentPolice} ,
+	            #{item.isRepeat} ,
+	            #{item.repeatCount} ,
+	            #{item.isSfsu} ,
+	            #{item.isPush} ,
+	            #{item.issueTime} ,
+	            #{item.handleOption} ,
+	            #{item.auditOption} ,
+	            #{item.leaderOption} ,
+	            #{item.creater} ,
+	            #{item.state} ,
+	            #{item.order} ,
+	            #{item.createTime} ,
+	            #{item.inputTime} ,
+	            #{item.issuer} ,
+	            #{item.isDelete} ,
+	            #{item.updateTime} ,
+	            #{item.updater} ,
+	            #{item.permanentAddress} ,
+	            #{item.is_law} ,
+	            #{item.work_id} 
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        xf_matters 
+        <set>
+		    <if test="item.xfDate != null" >
+	        xf_date = #{item.xfDate},
+	        </if>
+		    <if test="item.xfName != null" >
+	        xf_name = #{item.xfName},
+	        </if>
+		    <if test="item.sex != null" >
+	        sex = #{item.sex},
+	        </if>
+		    <if test="item.age != null" >
+	        Age = #{item.age},
+	        </if>
+		    <if test="item.nation != null" >
+	        nation = #{item.nation},
+	        </if>
+		    <if test="item.education != null" >
+	        education = #{item.education},
+	        </if>
+		    <if test="item.personQty != null" >
+	        person_qty = #{item.personQty},
+	        </if>
+		    <if test="item.unit != null" >
+	        unit = #{item.unit},
+	        </if>
+		    <if test="item.address != null" >
+	        address = #{item.address},
+	        </if>
+		    <if test="item.contact != null" >
+	        contact = #{item.contact},
+	        </if>
+		    <if test="item.credentials != null" >
+	        credentials = #{item.credentials},
+	        </if>
+		    <if test="item.credentialsType != null" >
+	        credentials_type = #{item.credentialsType},
+	        </if>
+		    <if test="item.xfException != null" >
+	        xf_exception = #{item.xfException},
+	        </if>
+		    <if test="item.complaintStage != null" >
+	        complaint_stage = #{item.complaintStage},
+	        </if>
+		    <if test="item.xfSource != null" >
+	        xf_source = #{item.xfSource},
+	        </if>
+		    <if test="item.xfType != null" >
+	        xf_type = #{item.xfType},
+	        </if>
+		    <if test="item.complaintType != null" >
+	        complaint_type = #{item.complaintType},
+	        </if>
+		    <if test="item.complaintSubType != null" >
+	        complaint_sub_type = #{item.complaintSubType},
+	        </if>
+		    <if test="item.szComplaintType != null" >
+	        sz_complaint_type = #{item.szComplaintType},
+	        </if>
+		    <if test="item.xfForm != null" >
+	        xf_form = #{item.xfForm},
+	        </if>
+		    <if test="item.xfFeature != null" >
+	        xf_feature = #{item.xfFeature},
+	        </if>
+		    <if test="item.xfDestination != null" >
+	        xf_destination = #{item.xfDestination},
+	        </if>
+		    <if test="item.receptionLeader != null" >
+	        reception_leader = #{item.receptionLeader},
+	        </if>
+		    <if test="item.xfAppeal != null" >
+	        xf_appeal = #{item.xfAppeal},
+	        </if>
+		    <if test="item.undertakeDepartment != null" >
+	        undertake_department = #{item.undertakeDepartment},
+	        </if>
+		    <if test="item.responsibilityDepartment != null" >
+	        responsibility_department = #{item.responsibilityDepartment},
+	        </if>
+		    <if test="item.concludeDeadline != null" >
+	        conclude_deadline = #{item.concludeDeadline},
+	        </if>
+		    <if test="item.remark != null" >
+	        remark = #{item.remark},
+	        </if>
+		    <if test="item.transactManner != null" >
+	        transact_manner = #{item.transactManner},
+	        </if>
+		    <if test="item.agentPolice != null" >
+	        agent_police = #{item.agentPolice},
+	        </if>
+		    <if test="item.isRepeat != null" >
+	        is_repeat = #{item.isRepeat},
+	        </if>
+		    <if test="item.repeatCount != null" >
+	        repeat_count = #{item.repeatCount},
+	        </if>
+		    <if test="item.isSfsu != null" >
+	        is_sfsu = #{item.isSfsu},
+	        </if>
+		    <if test="item.isPush != null" >
+	        is_push = #{item.isPush},
+	        </if>
+		    <if test="item.issueTime != null" >
+	        issue_time = #{item.issueTime},
+	        </if>
+		    <if test="item.handleOption != null" >
+	        handle_option = #{item.handleOption},
+	        </if>
+		    <if test="item.auditOption != null" >
+	        audit_option = #{item.auditOption},
+	        </if>
+		    <if test="item.leaderOption != null" >
+	        leader_option = #{item.leaderOption},
+	        </if>
+		    <if test="item.creater != null" >
+	        creater = #{item.creater},
+	        </if>
+		    <if test="item.state != null" >
+	        state = #{item.state},
+	        </if>
+		    <if test="item.order != null" >
+	        `order` = #{item.order},
+	        </if>
+		    <if test="item.createTime != null" >
+	        create_time = #{item.createTime},
+	        </if>
+		    <if test="item.inputTime != null" >
+	        input_time = #{item.inputTime},
+	        </if>
+		    <if test="item.issuer != null" >
+	        `issuer` = #{item.issuer},
+	        </if>
+		    <if test="item.isDelete != null" >
+	        is_delete = #{item.isDelete},
+	        </if>
+	        <if test="item.updateTime != null" >
+	        update_time = #{item.updateTime},
+	        </if>
+		    <if test="item.updater != null" >
+	        updater = #{item.updater},
+	        </if>
+		    <if test="item.permanentAddress != null" >
+	        permanent_address = #{item.permanentAddress},
+	        </if>
+	        <if test="item.isexport != null" >
+	        isexport = #{item.isexport}
+	        </if>
+	    </set>
+        WHERE  
+        	 id=#{item.id}
+        </foreach>    
+	</update>
+
+	<select id="getByWorkid" parameterType="string" resultType="com.netintech.xfquartz.bean.XfMatters">
+		select id,work_id,xf_name,xf_date
+		from xf_matters
+		where work_id=#{busiNumber} and state &lt; 10
+	</select>
+
+	<!--获取最大登记文号+1  -->
+	<select id="getByMaxOrder"  parameterType="map" resultType="int">
+	     SELECT MAX(`order`)+1  FROM xf_matters where xf_year=#{year}
+	</select>
+
+	<select id="getByEntityAndPressing" parameterType="map" resultMap="ResultMapXfMatters">
+		select id,ms110addcontent from xf_matters
+		where work_id=#{work_id} and state &lt; 10
+	</select>
+
+	<select id="getByWorkid2" parameterType="string" resultType="com.netintech.xfquartz.bean.XfMatters">
+		select *
+		from xf_matters
+		where work_id=#{workid}
+	</select>
+	
+</mapper>
+

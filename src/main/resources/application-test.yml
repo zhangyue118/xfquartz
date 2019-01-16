@@ -7,16 +7,16 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
     second:
-      username: xfk
-      password: "000"
+      username: qjt
+      password: netmarch
       driver-class-name: oracle.jdbc.driver.OracleDriver
       url: jdbc:oracle:thin:@172.16.11.184:1521:XE
       type: com.alibaba.druid.pool.DruidDataSource
     third:
-      username: qjt
-      password: netmarch
+      username: xfk
+      password: 000
       driver-class-name: oracle.jdbc.driver.OracleDriver
-      url: jdbc:oracle:thin:@10.35.197.187:1521:ORA10G
+      url: jdbc:oracle:thin:@172.16.11.184:1521:XE
       type: com.alibaba.druid.pool.DruidDataSource
 
 
@@ -25,7 +25,6 @@ server:
 
 #mybatis:
 #  configuration:
-#    jdbc-type-for-null: 'null'
 #    map-underscore-to-camel-case: true #开启驼峰命名匹配
 
 #logging:
@@ -39,10 +38,10 @@ server:
 
 project-params:
   #获取管理员
-  admin: 19
+  getAdmin: 19
   #获取管理员权限
-  adminRole: 62
+  getAdminRole: 62
   #保存文件路径
   saveFilePath: D:/xfUpload
   #回显文件路径
-  filePath: http://172.16.11.184:8092
+  getFilePath: http://172.16.11.184:8092

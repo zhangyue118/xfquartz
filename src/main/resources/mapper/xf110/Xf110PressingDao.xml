@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.netintech.xfquartz.dao.xf110.Xf110PressingDao">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapXfPressing" type="com.netintech.xfquartz.bean.XfPressing">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="formId" column="form_Id"  jdbcType="VARCHAR"/>
+        <result property="busiNumber" column="busi_number"  jdbcType="VARCHAR"/>
+        <result property="addTime" column="add_time"  jdbcType="VARCHAR"/>
+        <result property="addContent" column="add_content"  jdbcType="VARCHAR"/>
+        <result property="flag" column="flag"  jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time"  jdbcType="DATE"/>
+        <result property="isFetch" column="is_fetch"  jdbcType="INTEGER"/>
+	</resultMap>
+	
+<!-- 	<resultMap id="ResultMapXfPressing2" type="com.netintech.xfquartz.bean.XfPressing"> -->
+<!--         <result property="id" column="ID"  jdbcType="NUMBER"/> -->
+<!--         <result property="formId" column="FORM_ID"  jdbcType="VARCHAR2"/> -->
+<!--         <result property="busiNumber" column="BUSI_NUMBER"  jdbcType="VARCHAR2"/> -->
+<!--         <result property="addTime" column="ADD_TIME"  jdbcType="DATE"/> -->
+<!--         <result property="addContent" column="ADD_CONTENT"  jdbcType="VARCHAR2"/> -->
+<!--         <result property="flag" column="FLAG"  jdbcType="NUMBER"/> -->
+<!--         <result property="createTime" column="CREATE_TIME"  jdbcType="DATE"/> -->
+<!--         <result property="isFetch" column="IS_FETCH"  jdbcType="NUMBER"/> -->
+<!-- 	</resultMap> -->
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库所有字段 -->
+	<sql id="XfPressing_field">
+           id,
+           form_Id,
+           busi_number,
+           add_time,
+           add_content,
+           flag,
+           create_time,
+           is_fetch
+	</sql>
+	
+	 <!-- 声明数据库字段除id -->
+	<sql id="XfPressing_insertField">
+           form_Id,
+           busi_number,
+           add_time,
+           add_content,
+           flag,
+           create_time,
+           is_fetch
+	</sql>
+	
+	<!-- 实体类属性  -->
+	<sql id="XfPressing_insert">
+        	#{id} ,
+        	#{formId} ,
+        	#{busiNumber} ,
+        	#{addTime} ,
+        	#{addContent} ,
+        	#{flag} ,
+        	#{createTime} ,
+        	#{isFetch} 
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="XfPressing_update">
+		    <if test="formId != null" >
+	            form_Id = #{formId} ,
+	        </if>
+		    <if test="busiNumber != null" >
+	            busi_number = #{busiNumber} ,
+	        </if>
+		    <if test="addTime != null" >
+	            add_time = #{addTime} ,
+	        </if>
+		    <if test="addContent != null" >
+	            add_content = #{addContent} ,
+	        </if>
+		    <if test="flag != null" >
+	            flag = #{flag} ,
+	        </if>
+		    <if test="createTime != null" >
+	            create_time = #{createTime} ,
+	        </if>
+		    <if test="isFetch != null" >
+	            is_fetch = #{isFetch} 
+	        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="XfPressing_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="formId != null " >
+	            and form_Id =#{formId}
+	        </if>
+	        <if test="busiNumber != null " >
+	            and busi_number =#{busiNumber}
+	        </if>
+	        <if test="addTime != null " >
+	            and add_time =#{addTime}
+	        </if>
+	        <if test="addContent != null " >
+	            and add_content =#{addContent}
+	        </if>
+	        <if test="flag != null " >
+	            and flag =#{flag}
+	        </if>
+	        <if test="createTime != null " >
+	            and create_time =#{createTime}
+	        </if>
+	        <if test="isFetch != null " >
+	            and is_fetch =#{isFetch}
+	        </if>
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.netintech.xfquartz.bean.XfPressing" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO xf_pressing (
+        <include refid="XfPressing_insertField" />
+        ) VALUES (
+        <include refid="XfPressing_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from xf_pressing where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.netintech.xfquartz.bean.XfPressing">
+	 delete from xf_pressing
+	  WHERE 1=1
+      <include refid="XfPressing_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from xf_pressing
+	  WHERE 1=1
+      <include refid="XfPressing_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.netintech.xfquartz.bean.XfPressing">
+        UPDATE xf_pressing
+        <set>
+	        <include refid="XfPressing_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapXfPressing" parameterType="map">
+		select <include refid="XfPressing_field" />
+ 		from xf_pressing where 1=1
+ 		<include refid="XfPressing_where" /> 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listByEntity" resultMap="ResultMapXfPressing" parameterType="com.netintech.xfquartz.bean.XfPressing">
+		select <include refid="XfPressing_field" />
+ 		from xf_pressing where 1=1
+ 		<include refid="XfPressing_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapXfPressing" parameterType="java.lang.Integer">
+		select 	<include refid="XfPressing_field" />
+ 		from xf_pressing 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapXfPressing" parameterType="map">
+		select <include refid="XfPressing_field" />
+ 		from xf_pressing where 1=1
+ 		<include refid="XfPressing_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapXfPressing" parameterType="com.netintech.xfquartz.bean.XfPressing">
+		select <include refid="XfPressing_field" />
+ 		from xf_pressing where 1=1
+ 		<include refid="XfPressing_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO xf_pressing (
+        <include refid="XfPressing_insertField" />
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			
+	            #{item.formId} ,
+	            #{item.busiNumber} ,
+	            #{item.addTime} ,
+	            #{item.addContent} ,
+	            #{item.flag} ,
+	            #{item.createTime} ,
+	            #{item.isFetch} 
+			
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        xf_pressing 
+        <set>
+		    <if test="item.formId != null" >
+	        form_Id = #{item.formId},
+	        </if>
+		    <if test="item.busiNumber != null" >
+	        busi_number = #{item.busiNumber},
+	        </if>
+		    <if test="item.addTime != null" >
+	        add_time = #{item.addTime},
+	        </if>
+		    <if test="item.addContent != null" >
+	        add_content = #{item.addContent},
+	        </if>
+		    <if test="item.flag != null" >
+	        flag = #{item.flag},
+	        </if>
+		    <if test="item.createTime != null" >
+	        create_time = #{item.createTime},
+	        </if>
+		    <if test="item.isFetch != null" >
+	        is_fetch = #{item.isFetch}
+	        </if>
+	    </set>
+        WHERE  
+        	 id=#{id}
+        </foreach>    
+	</update>
+	
+	
+	 <!--查询总数  -->
+	<select id="getXfPressingCount"  parameterType="map" resultType="int">
+	     SELECT count(1) FROM xf_pressing 
+	     where 1=1 
+          <if test="keyword!=null and keyword!=''">
+	      </if>
+	</select>
+	
+	 <!--查询列表  -->
+	<select id="getXfPressingList"  parameterType="map"  resultType="com.netintech.xfquartz.bean.XfPressing">
+	   SELECT * FROM xf_pressing
+       where 1=1 
+	    <if test="keyword!=null and keyword!=''">
+	    </if>
+         LIMIT 0,1000
+	</select>   
+	
+	<!-- 批量删除 -->
+	<delete id="exDelete" parameterType="String">
+	  delete from xf_pressing
+	   where id in (1)
+	</delete>
+	
+	<select id="getXfPressingList2" resultMap="ResultMapXfPressing">
+		select * from xf_pressing where is_Fetch=0
+	</select>
+	
+	<update id="updateById2" parameterType="com.netintech.xfquartz.bean.XfPressing">
+        UPDATE xf_pressing
+        <set>
+	        <include refid="XfPressing_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+
+</mapper>
+

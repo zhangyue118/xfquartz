@@ -22,23 +22,23 @@ import javax.sql.DataSource;
  * @description:
  */
 @Configuration
-@MapperScan(basePackages = {"com.netintech.xfquartz.dao.qjt"}, sqlSessionTemplateRef = "qjtSqlSessionTemplate")
-public class QJTMybatisConfig {
+@MapperScan(basePackages = {"com.netintech.xfquartz.dao.xf110"}, sqlSessionTemplateRef = "xf110SqlSessionTemplate")
+public class XF110MybatisConfig {
 
-    @Bean(name = "qjtDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.third")
-    public DataSource qjtDataSource(){
+    @Bean(name = "xf110DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.second")
+    public DataSource xf110DataSource(){
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    public SqlSessionFactory qjtSqlSessionFactory(@Qualifier("qjtDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory xf110SqlSessionFactory(@Qualifier("xf110DataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
-            bean.setMapperLocations(resolver.getResources("classpath:mapper/qjt/*.xml"));
+            bean.setMapperLocations(resolver.getResources("classpath:mapper/xf110/*.xml"));
             return bean.getObject();
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,14 +46,14 @@ public class QJTMybatisConfig {
         }
     }
 
-    @Bean(name = "qjtTransactionManager")
-    @Primary
-    public DataSourceTransactionManager sentinelTransactionManager(@Qualifier("qjtDataSource") DataSource dataSource) {
+    @Bean(name = "xf110TransactionManager")
+    //@Primary
+    public DataSourceTransactionManager sentinelTransactionManager(@Qualifier("xf110DataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean
-    public SqlSessionTemplate qjtSqlSessionTemplate(@Qualifier("qjtSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate xf110SqlSessionTemplate(@Qualifier("xf110SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory); // 使用上面配置的Factory
         return template;
     }
