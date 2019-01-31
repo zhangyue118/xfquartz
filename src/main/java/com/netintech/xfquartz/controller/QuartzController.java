@@ -84,8 +84,11 @@ public class QuartzController {
     @Autowired
     private Xf110FormAtachmentDao xf110FormAtachmentDao;
 
+    /**
+     * fixedDelay = 15000 以一个固定延迟时间15秒钟调用一次执行 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，15s后再次执行
+     */
     @RequestMapping("xf110")
-    @Scheduled(fixedDelay = 15000)//以一个固定延迟时间15秒钟调用一次执行 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，15s后再次执行
+    //@Scheduled(fixedDelay = 15000)
     public void sysLogs(){
         try {
             log.info("定时任务执行开始...");
@@ -97,15 +100,17 @@ public class QuartzController {
         }
     }
 
-    //本地同步处理结果到中间数据库
+    /**
+     * 本地同步处理结果到中间数据库
+     */
     private void synchronizationMS110(){
         Map<String, Object> map=new HashMap<String, Object>();
         List<XfWorkFinish> ltXfWorkFinish=xfWorkFinishDao.getXfWorkFinishList(map);
         if(ltXfWorkFinish.size()>0){
             //xfWorkFinishService.insertBatch2(ltXfWorkFinish);
-            XfWorkFinish XfWorkFinish2=new XfWorkFinish();
+            XfWorkFinish xfWorkFinish2=new XfWorkFinish();
             for(XfWorkFinish x:ltXfWorkFinish){
-                XfWorkFinish2.setId(x.getId());
+                xfWorkFinish2.setId(x.getId());
                 try {
                     xf110WorkFinishDao.insert2(x);
                 } catch (Exception e) {
@@ -114,8 +119,8 @@ public class QuartzController {
                     continue;
                 }
                 try {
-                    XfWorkFinish2.setIsHandle(1);
-                    xfWorkFinishDao.updateById(XfWorkFinish2);
+                    xfWorkFinish2.setIsHandle(1);
+                    xfWorkFinishDao.updateById(xfWorkFinish2);
                     log.info(x.getFormId()+"--已办结");
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -195,7 +200,9 @@ public class QuartzController {
 
     }
 
-    //从中间数据库抽取民生110信访事项
+    /**
+     * 从中间数据库抽取民生110信访事项
+     */
     private void fetchMS110() {
         //flag=true;
         // TODO Auto-generated method stub
@@ -204,15 +211,9 @@ public class QuartzController {
         List<XfMatters> ltXfMatters=new ArrayList<XfMatters>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for(XfWork x:ltXfWork){
-            Integer xId=x.getId();
             List<XfMatters> lxfMatters= xfMattersDao.getByWorkid(x.getBusiNumber());
             if(lxfMatters.size()>0){
                 continue;
-            }
-            try {
-                xfWorkDao.insert(x);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
             XfMatters xfMatters=new XfMatters();
             xfMatters.setAddress(x.getBusiAddress());
@@ -266,7 +267,8 @@ public class QuartzController {
             if(maxOrder==null){
                 maxOrder=1;
             }
-            xfMatters.setOrder(maxOrder);//最大文号
+            //最大文号
+            xfMatters.setOrder(maxOrder);
 
             try {
                 xfMatters.setXfDate(formatter.parse(x.getCreateTime()));
@@ -298,11 +300,16 @@ public class QuartzController {
             ltXfMatters.add(xfMatters);
             try {
                 xfMattersDao.insert(xfMatters);
-                x.setId(xId);
                 x.setIsFetch(1);
                 xf110WorkDao.updateById2(x);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                x.setMatterId(xfMatters.getId());
+                xfWorkDao.insert(x);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -340,26 +347,40 @@ public class QuartzController {
         XfMatters xfMatters=new XfMatters();
         String ms110addcontent="";
         for(XfPressing p:ltXfPressing){
+            Integer pId=p.getId();
             map.put("work_id", p.getBusiNumber());
-            List<XfMatters> ltxfMatters =xfMattersDao.getByEntityAndPressing(map);
-            if(ltxfMatters.size()>0){
-                xfMatters=ltxfMatters.get(0);
-                ms110addcontent=xfMatters.getMs110addcontent();
-                if(StringUtils.isEmpty(ms110addcontent)){
-                    ms110addcontent="";
+            try {
+                List<XfMatters> ltxfMatters =xfMattersDao.getByEntityAndPressing(map);
+                if(ltxfMatters.size()>0){
+                    xfMatters=ltxfMatters.get(0);
+                    map.clear();
+                    map.put("matterId",xfMatters.getId());
+                    XfWork xfWork=xfWorkDao.getByMap(map);
+                    ms110addcontent=xfWork.getAddcontent();
+                    if(StringUtils.isEmpty(ms110addcontent)){
+                        ms110addcontent="";
+                    }
+                    if(1==p.getFlag()){
+                        ms110addcontent=ms110addcontent+"补充:\n";
+                    }else{
+                        ms110addcontent=ms110addcontent+"催办:\n";
+                    }
+                    ms110addcontent=ms110addcontent+p.getAddContent()+"\n";
+//                    xfMatters.setMs110addcontent(ms110addcontent);
+//                    xfMattersDao.updateById(xfMatters);
+                    xfWork.setAddcontent(ms110addcontent);
+                    xfWorkDao.updateById(xfWork);
+                    p.setMatterId(xfMatters.getId());
+                    p.setId(null);
+                    xfPressingDao.insert(p);
                 }
-                if(1==p.getFlag()){
-                    ms110addcontent=ms110addcontent+"补充:\n";
-                }else{
-                    ms110addcontent=ms110addcontent+"催办:\n";
-                }
-                ms110addcontent=ms110addcontent+p.getAddContent()+"\n";
-                xfMatters.setMs110addcontent(ms110addcontent);
-                xfMattersDao.updateById(xfMatters);
+                p.setIsFetch(1);
+                p.setId(pId);
+                xf110PressingDao.updateById2(p);
+                log.info(p.getBusiNumber()+"--有新的补充或催办");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            p.setIsFetch(1);
-            xf110PressingDao.updateById2(p);
-            log.info(p.getBusiNumber()+"--有新的补充或催办");
         }
 
         //民生110附件
@@ -368,7 +389,7 @@ public class QuartzController {
         List<XfAttachment> ltXfAttachment=new ArrayList<XfAttachment>();
         for(XfFormAtachment x:ltXfFormAtachment){
             ltXfMatters=xfMattersDao.getByWorkid2(x.getBusinessNumber());
-            boolean flag=false;
+            boolean flag=true;
             for(XfMatters m:ltXfMatters){
                 XfAttachment xfAttachment=new XfAttachment();
                 xfAttachment.setCreater(projectParamsConfig.getAdmin());
@@ -384,15 +405,16 @@ public class QuartzController {
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
                 String newName = "X"+sdf.format(new Date()) +""+"."+prefix;
                 // 转存文件
-                byte[] Buffer = x.getFiles();
-                Filebyte.getFile(Buffer, projectParamsConfig.getSaveFilePath(), newName);
+                byte[] buffer = x.getFiles();
+                Filebyte.getFile(buffer, projectParamsConfig.getSaveFilePath(), newName);
                 xfAttachment.setFile("/xfUpload/"+newName);
                 xfAttachment.setExtension(prefix);
-                xfAttachment.setFileSize(String.valueOf(Buffer.length));
+                xfAttachment.setFileSize(String.valueOf(buffer.length));
 
                 ltXfAttachment.add(xfAttachment);
                 try {
                     xfAttachmentDao.insert(xfAttachment);
+                    flag=false;
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

@@ -35,6 +35,8 @@
         <result property="updateTime" column="updateTime"  jdbcType="DATE"/>
         <result property="pullTime" column="pullTime"  jdbcType="DATE"/>
         <result property="hisadv" column="hisadv"  jdbcType="VARCHAR"/>
+		<result property="matterId" column="matter_id"  jdbcType="INTEGER"/>
+		<result property="addcontent" column="addcontent"  jdbcType="VARCHAR"/>
 	</resultMap>
 	 <!-- 实体类与数据库映射字段部分  end -->
 	 
@@ -67,7 +69,9 @@
            isFetch,
            updateTime,
            pullTime,
-           hisadv
+           hisadv,
+           matter_id,
+           addcontent
 	</sql>
 	
 	 <!-- 声明数据库字段除id -->
@@ -98,7 +102,9 @@
            isFetch,
            updateTime,
            pullTime,
-           hisadv
+           hisadv,
+           matter_id,
+           addcontent
 	</sql>
 	
 	<!-- 实体类属性  -->
@@ -129,7 +135,9 @@
         	#{isFetch} ,
         	#{updateTime} ,
         	#{pullTime} ,
-        	#{hisadv}
+        	#{hisadv},
+        	#{matterId},
+        	#{addcontent}
 	</sql>
 	
 	<!-- 执行修改时 数据库字段和表字段比较 -->
@@ -213,8 +221,14 @@
 	            pullTime = #{pullTime} ,
 	        </if>
 	        <if test="hisadv != null" >
-	            hisadv = #{hisadv}
+	            hisadv = #{hisadv},
 	        </if>
+		<if test="matterId != null" >
+			matter_id = #{matterId},
+		</if>
+		<if test="addcontent != null" >
+			addcontent = #{addcontent},
+		</if>
 	</sql>
 	
 	<!-- 执行修改时 数据库字段和表字段比较 -->
@@ -388,7 +402,12 @@
 	        <if test="hisadv != null " >
 	            and hisadv =#{hisadv}
 	        </if>
-
+			<if test="matterId != null " >
+				and matter_id =#{matterId}
+			</if>
+			<if test="addcontent != null " >
+				and addcontent =#{addcontent}
+			</if>
 	</sql>
 	
    <!-- **************************************分割线************************************************************ -->	

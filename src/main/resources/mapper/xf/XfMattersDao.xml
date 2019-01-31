@@ -1000,14 +1000,16 @@
 	</select>
 
 	<select id="getByEntityAndPressing" parameterType="map" resultMap="ResultMapXfMatters">
-		select id,ms110addcontent from xf_matters
-		where work_id=#{work_id} and state &lt; 10
+		select m.id from xf_matters m
+		join xf_work w on w.matter_id=m.id
+		where w.busiNumber=#{work_id} and m.state &lt; 10
 	</select>
 
 	<select id="getByWorkid2" parameterType="string" resultType="com.netintech.xfquartz.bean.XfMatters">
 		select *
-		from xf_matters
-		where work_id=#{workid}
+		from xf_matters m
+		join xf_work w on w.matter_id=m.id
+		where w.busiNumber=#{workid}
 	</select>
 	
 </mapper>

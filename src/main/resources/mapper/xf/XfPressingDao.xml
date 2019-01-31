@@ -15,6 +15,7 @@
         <result property="flag" column="flag"  jdbcType="INTEGER"/>
         <result property="createTime" column="create_time"  jdbcType="DATE"/>
         <result property="isFetch" column="is_fetch"  jdbcType="INTEGER"/>
+		<result property="matterId" column="matter_id"  jdbcType="INTEGER"/>
 	</resultMap>
 	
 <!-- 	<resultMap id="ResultMapXfPressing2" type="com.netintech.xfquartz.bean.XfPressing"> -->
@@ -38,7 +39,8 @@
            add_content,
            flag,
            create_time,
-           is_fetch
+           is_fetch,
+           matter_id
 	</sql>
 	
 	 <!-- 声明数据库字段除id -->
@@ -49,19 +51,20 @@
            add_content,
            flag,
            create_time,
-           is_fetch
+           is_fetch,
+           matter_id
 	</sql>
 	
 	<!-- 实体类属性  -->
 	<sql id="XfPressing_insert">
-        	#{id} ,
         	#{formId} ,
         	#{busiNumber} ,
         	#{addTime} ,
         	#{addContent} ,
         	#{flag} ,
         	#{createTime} ,
-        	#{isFetch} 
+        	#{isFetch} ,
+        	${matterId}
 	</sql>
 	
 	<!-- 执行修改时 数据库字段和表字段比较 -->
@@ -85,8 +88,11 @@
 	            create_time = #{createTime} ,
 	        </if>
 		    <if test="isFetch != null" >
-	            is_fetch = #{isFetch} 
+	            is_fetch = #{isFetch} ,
 	        </if>
+			<if test="matterId != null" >
+				matter_id = #{matterId}
+			</if>
 	</sql>
 	
 	<!-- 查询时条件 -->
@@ -115,6 +121,9 @@
 	        <if test="isFetch != null " >
 	            and is_fetch =#{isFetch}
 	        </if>
+			<if test="matterId != null " >
+				and matter_id =#{matterId}
+			</if>
 	</sql>
 	
    <!-- **************************************分割线************************************************************ -->	

@@ -157,7 +157,9 @@ public class XfWork implements Serializable {
 
 	private String hisadv;//民生110历史反馈内容
 
-	private String ms110addcontent;//民生110补充催办内容
+	private String addcontent;//民生110补充催办内容
+
+	private Integer matterId;
 
 }
 

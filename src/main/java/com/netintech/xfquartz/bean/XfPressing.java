@@ -58,5 +58,11 @@ public class XfPressing implements Serializable {
 	 * */
 	private Integer isFetch;
 
+	/**
+	 *  @Fields matter_id : 事项id
+	 *
+	 * */
+	private Integer matterId;
+
 }
 

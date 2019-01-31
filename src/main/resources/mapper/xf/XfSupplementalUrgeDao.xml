@@ -7,14 +7,16 @@
 
      <select id="getXfSupplementalUrgeCount" parameterType="map" resultType="int">
 		 select count(1) from 
-	     (SELECT m.id FROM xf_matters m
-	     left JOIN xf_trace t on t.matter_id=m.id
-	     where state &lt; 10 and
-	     t.undertake_unit=(SELECT dept_id FROM xf_user WHERE id=#{userId}) and m.ms110addcontent is not null and m.ms110addcontent !=''
-	     union
+			 (SELECT m.id FROM xf_matters m
+			 left JOIN xf_trace t on t.matter_id=m.id
+			 join xf_pressing p on p.matter_id=m.id
+			 where m.state &lt; 10 and
+			 t.undertake_unit=(SELECT dept_id FROM xf_user WHERE id=#{userId})
+	     	union
 			SELECT m.id FROM xf_matters m
-		    where state &lt; 10 and
-	 		(SELECT dept_id FROM xf_user WHERE id=#{userId})=(SELECT dept_id FROM xf_user WHERE id=m.creater) and m.ms110addcontent is not null and m.ms110addcontent !=''
+			join xf_pressing p on p.matter_id=m.id
+		    where m.state &lt; 10 and
+	 		(SELECT dept_id FROM xf_user WHERE id=#{userId})=(SELECT dept_id FROM xf_user WHERE id=m.creater)
 	 		)a
 	</select>
 	
