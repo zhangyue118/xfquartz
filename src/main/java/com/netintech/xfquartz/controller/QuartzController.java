@@ -88,13 +88,45 @@ public class QuartzController {
      * fixedDelay = 15000 以一个固定延迟时间15秒钟调用一次执行 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，15s后再次执行
      */
     @RequestMapping("xf110")
-    //@Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 15000)
     public void sysLogs(){
         try {
             log.info("定时任务执行开始...");
             fetchMS110();
             synchronizationMS110();
             log.info("定时任务执行结束...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("xf1102")
+    //@Scheduled(fixedDelay = 15000)
+    public void sysLogs2(){
+        try {
+            Map<String, Object> map=new HashMap<String, Object>();
+            List<XfWork> ltXfWork=xf110WorkDao.getXfWorkList2(map);
+            List<XfMatters> ltXfMatters=new ArrayList<XfMatters>();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for(XfWork x:ltXfWork){
+                //List<XfMatters> lxfMatters= xfMattersDao.getByWorkid(x.getBusiNumber());
+                map.put("busiNumber",x.getBusiNumber());
+                map.put("time",x.getPlanTime());
+                List<XfMatters> lxfMatters= xfMattersDao.getByWorkidandTime(map);
+                if(lxfMatters.size()>0){
+                    //continue;
+                    try {
+                        x.setMatterId(lxfMatters.get(0).getId());
+                        xfWorkDao.insert(x);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -366,8 +398,12 @@ public class QuartzController {
                         ms110addcontent=ms110addcontent+"催办:\n";
                     }
                     ms110addcontent=ms110addcontent+p.getAddContent()+"\n";
-//                    xfMatters.setMs110addcontent(ms110addcontent);
-//                    xfMattersDao.updateById(xfMatters);
+                    try {
+                        xfMatters.setMs110addcontent(ms110addcontent);
+                        xfMattersDao.updateById(xfMatters);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     xfWork.setAddcontent(ms110addcontent);
                     xfWorkDao.updateById(xfWork);
                     p.setMatterId(xfMatters.getId());

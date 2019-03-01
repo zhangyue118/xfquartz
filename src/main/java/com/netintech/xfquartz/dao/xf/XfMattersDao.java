@@ -25,4 +25,6 @@ public interface XfMattersDao extends BaseDao<XfMatters> {
 	Integer getByMaxOrder(Map<String, Object> map);
 
 	List<XfMatters> getByEntityAndPressing(Map<String, Object> map);
+
+    List<XfMatters> getByWorkidandTime(Map<String,Object> map);
 }

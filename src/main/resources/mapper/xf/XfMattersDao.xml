@@ -991,7 +991,13 @@
 	<select id="getByWorkid" parameterType="string" resultType="com.netintech.xfquartz.bean.XfMatters">
 		select id,work_id,xf_name,xf_date
 		from xf_matters
-		where work_id=#{busiNumber} and state &lt; 10
+		where work_id=#{busiNumber} and state &lt; 10 and is_delete=0
+	</select>
+
+	<select id="getByWorkidandTime" parameterType="map" resultType="com.netintech.xfquartz.bean.XfMatters">
+		select id,work_id,xf_name,xf_date
+		from xf_matters
+		where work_id=#{busiNumber} and state &lt; 10 and ms110conclude_deadline=#{time} and is_delete=0
 	</select>
 
 	<!--获取最大登记文号+1  -->

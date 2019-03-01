@@ -46,7 +46,7 @@ public class ScheduledController {
      */
     @GetMapping("/hello")
     //@Scheduled(cron = "0/15 * * * * MON-SAT")
-    //@Scheduled(fixedDelay = 10000)//以一个固定延迟时间10秒钟调用一次执行 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，10s后再次执行
+    @Scheduled(fixedDelay = 10000)//以一个固定延迟时间10秒钟调用一次执行 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，10s后再次执行
     public void xfSupplementalUrgeCount(){
         Map<String,MyWebSocket> map=MyWebSocket.getConnections();
         for(String in:map.keySet()){
